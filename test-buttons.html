@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Visibility Test - Employer Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-result {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 4px solid;
+        }
+        .success {
+            background-color: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+        .info {
+            background-color: #d1ecf1;
+            border-color: #17a2b8;
+            color: #0c5460;
+        }
+        .btn-test {
+            margin: 5px;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-primary { background: #007bff; color: white; }
+        .btn-secondary { background: #6c757d; color: white; }
+        .btn-success { background: #28a745; color: white; }
+        .btn-warning { background: #ffc107; color: #212529; }
+        .btn-danger { background: #dc3545; color: white; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔧 Employer Portal Button Visibility Test</h1>
+        <p>This page tests whether all buttons in the employer portal are visible and functional.</p>
+        
+        <div class="test-result success">
+            <strong>✅ Fixed Issues:</strong>
+            <ul>
+                <li>Removed inline styles that were overriding CSS classes</li>
+                <li>Added explicit display: inline-flex !important for all buttons</li>
+                <li>Added opacity: 1 !important and visibility: visible !important</li>
+                <li>Enhanced hover states with transform animations</li>
+                <li>Fixed z-index positioning for welcome buttons</li>
+            </ul>
+        </div>
+        
+        <div class="test-result info">
+            <strong>📋 Button Types Fixed:</strong>
+            <ul>
+                <li><strong>Welcome Buttons:</strong> Get Started & Post Internship</li>
+                <li><strong>Navigation Tabs:</strong> Dashboard, Post Internship, Candidates, etc.</li>
+                <li><strong>Form Buttons:</strong> Reset Form & Submit buttons</li>
+                <li><strong>Action Buttons:</strong> View Profile, Interview, Test, Send Offer</li>
+                <li><strong>Logout Button:</strong> Enhanced visibility and hover effects</li>
+            </ul>
+        </div>
+        
+        <h3>Test Buttons (should all be visible):</h3>
+        <button class="btn-test btn-primary" onclick="alert('Primary button works!')">Primary Button</button>
+        <button class="btn-test btn-secondary" onclick="alert('Secondary button works!')">Secondary Button</button>
+        <button class="btn-test btn-success" onclick="alert('Success button works!')">Success Button</button>
+        <button class="btn-test btn-warning" onclick="alert('Warning button works!')">Warning Button</button>
+        <button class="btn-test btn-danger" onclick="alert('Danger button works!')">Danger Button</button>
+        
+        <div class="test-result success">
+            <strong>🎯 Next Steps:</strong>
+            <ol>
+                <li>Open the Employer Portal in your browser</li>
+                <li>Verify all buttons are now visible</li>
+                <li>Test clicking on different buttons to ensure functionality</li>
+                <li>Check hover effects are working properly</li>
+            </ol>
+        </div>
+        
+        <h3>Quick Access:</h3>
+        <button class="btn-test btn-primary" onclick="window.open('../pages/employer-portal.html', '_blank')">
+            🏢 Open Employer Portal
+        </button>
+        <button class="btn-test btn-secondary" onclick="window.open('../index.html', '_blank')">
+            🏠 Open Main Page
+        </button>
+    </div>
+</body>
+</html>

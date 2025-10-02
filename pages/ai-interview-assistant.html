@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Interview Assistant - PRAGATI-AI</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="ai-interview-assistant.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="interview-assistant">
+        <div class="container">
+            <!-- Header -->
+            <div class="header">
+                <div class="logo">
+                    <i class="fas fa-robot"></i>
+                    <h1>AI Interview Assistant</h1>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-outline" onclick="goBack()">
+                        <i class="fas fa-arrow-left"></i> Back to Portal
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Interface -->
+            <div class="interview-interface">
+                <!-- Left Panel - Interview Setup -->
+                <div class="setup-panel">
+                    <div class="panel-header">
+                        <h3><i class="fas fa-cog"></i> Interview Setup</h3>
+                    </div>
+                    
+                    <div class="setup-options">
+                        <div class="option-group">
+                            <label>Interview Type</label>
+                            <select id="interview-type" class="form-control">
+                                <option value="technical">Technical Interview</option>
+                                <option value="hr">HR Interview</option>
+                                <option value="behavioral">Behavioral Interview</option>
+                                <option value="case-study">Case Study</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label>Programming Language / Skill Focus</label>
+                            <select id="skill-focus" class="form-control">
+                                <option value="python">Python Programming</option>
+                                <option value="javascript">JavaScript Development</option>
+                                <option value="java">Java Programming</option>
+                                <option value="react">React.js Framework</option>
+                                <option value="node">Node.js Backend</option>
+                                <option value="sql">Database & SQL</option>
+                                <option value="data-science">Data Science & ML</option>
+                                <option value="frontend">Frontend Development</option>
+                                <option value="backend">Backend Development</option>
+                                <option value="fullstack">Full Stack Development</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label>Difficulty Level</label>
+                            <div class="difficulty-selector">
+                                <button class="difficulty-btn active" data-level="beginner">Beginner</button>
+                                <button class="difficulty-btn" data-level="intermediate">Intermediate</button>
+                                <button class="difficulty-btn" data-level="advanced">Advanced</button>
+                            </div>
+                        </div>
+
+                        <div class="option-group">
+                            <label>Session Duration</label>
+                            <div class="duration-selector">
+                                <button class="duration-btn" data-duration="15">15 min</button>
+                                <button class="duration-btn active" data-duration="30">30 min</button>
+                                <button class="duration-btn" data-duration="45">45 min</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary btn-start" onclick="startInterview()">
+                        <i class="fas fa-play"></i> Start Interview
+                    </button>
+                </div>
+
+                <!-- Center Panel - AI Interviewer -->
+                <div class="interviewer-panel">
+                    <div class="ai-avatar">
+                        <div class="avatar-container">
+                            <div class="avatar-face">
+                                <div class="eyes">
+                                    <div class="eye left"></div>
+                                    <div class="eye right"></div>
+                                </div>
+                                <div class="mouth"></div>
+                            </div>
+                            <div class="speaking-indicator"></div>
+                        </div>
+                    </div>
+
+                    <div class="interview-status">
+                        <div class="status-bar">
+                            <span class="status-text">Ready to start interview</span>
+                            <div class="timer">00:00</div>
+                        </div>
+                    </div>
+
+                    <div class="current-question">
+                        <h4>Welcome to your AI-powered interview session!</h4>
+                        <p>Click "Start Interview" to begin your personalized interview experience.</p>
+                    </div>
+
+                    <div class="audio-controls">
+                        <button class="control-btn" id="mic-btn" onclick="toggleMicrophone()">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                        <button class="control-btn" id="speaker-btn" onclick="toggleSpeaker()">
+                            <i class="fas fa-volume-up"></i>
+                        </button>
+                        <button class="control-btn" id="pause-btn" onclick="pauseInterview()">
+                            <i class="fas fa-pause"></i>
+                        </button>
+                    </div>
+
+                    <div class="response-area">
+                        <div class="speech-input">
+                            <div class="mic-visualization">
+                                <div class="wave"></div>
+                                <div class="wave"></div>
+                                <div class="wave"></div>
+                                <div class="wave"></div>
+                                <div class="wave"></div>
+                            </div>
+                            <p class="speech-status">Click microphone to start speaking</p>
+                        </div>
+                        
+                        <div class="text-input">
+                            <textarea 
+                                id="text-response" 
+                                placeholder="Or type your response here..."
+                                rows="4"
+                            ></textarea>
+                            <button class="btn btn-secondary" onclick="submitTextResponse()">
+                                <i class="fas fa-paper-plane"></i> Submit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Panel - Real-time Analysis -->
+                <div class="analysis-panel">
+                    <div class="panel-header">
+                        <h3><i class="fas fa-chart-line"></i> Real-time Analysis</h3>
+                    </div>
+
+                    <div class="metrics">
+                        <div class="metric-card">
+                            <div class="metric-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <div class="metric-info">
+                                <span class="metric-value" id="confidence-score">85</span>
+                                <span class="metric-label">Confidence</span>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="metric-info">
+                                <span class="metric-value" id="response-time">2.3s</span>
+                                <span class="metric-label">Avg Response</span>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-icon">
+                                <i class="fas fa-volume-down"></i>
+                            </div>
+                            <div class="metric-info">
+                                <span class="metric-value" id="speech-clarity">92</span>
+                                <span class="metric-label">Clarity</span>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="metric-info">
+                                <span class="metric-value" id="content-quality">78</span>
+                                <span class="metric-label">Content</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feedback-section">
+                        <h4>Live Feedback</h4>
+                        <div class="feedback-list" id="live-feedback">
+                            <div class="feedback-item good">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Good eye contact and posture</span>
+                            </div>
+                            <div class="feedback-item neutral">
+                                <i class="fas fa-info-circle"></i>
+                                <span>Try to elaborate more on examples</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="progress-section">
+                        <h4>Interview Progress</h4>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="interview-progress" style="width: 0%"></div>
+                        </div>
+                        <div class="progress-info">
+                            <span>Question <span id="current-q">1</span> of <span id="total-q">10</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Modal -->
+            <div id="results-modal" class="modal-overlay">
+                <div class="modal">
+                    <div class="modal-header">
+                        <h3>Interview Complete!</h3>
+                        <button class="modal-close" onclick="closeResults()">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="results-summary">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="ai-interview-assistant.js"></script>
+</body>
+</html>

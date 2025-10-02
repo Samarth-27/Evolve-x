@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Demo - PRAGATI-AI</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .admin-portal {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        
+        .admin-header {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .admin-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .admin-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .admin-controls {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .status-badge {
+            background: #10b981;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        .admin-content {
+            padding: 2rem 0;
+        }
+        
+        .system-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .system-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .system-card h3 {
+            margin-bottom: 1rem;
+            color: #fbbf24;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .metric-item {
+            text-align: center;
+        }
+        
+        .metric-value {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #10b981;
+        }
+        
+        .metric-label {
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+        
+        .module-testing {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 1rem;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .module-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .module-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .module-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .module-status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .status-active {
+            color: #10b981;
+        }
+        
+        .demo-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .demo-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .demo-btn {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .demo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .live-demo-area {
+            background: #000;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.4;
+            min-height: 300px;
+            overflow-y: auto;
+            border: 2px solid #333;
+        }
+        
+        .console-line {
+            margin-bottom: 0.5rem;
+        }
+        
+        .console-success { color: #10b981; }
+        .console-warning { color: #fbbf24; }
+        .console-error { color: #ef4444; }
+        .console-info { color: #3b82f6; }
+    </style>
+</head>
+<body>
+    <div class="admin-portal">
+        <header class="admin-header">
+            <div class="container">
+                <div class="admin-nav">
+                    <div class="admin-title">
+                        <i class="fas fa-crown" style="color: #fbbf24; font-size: 1.5rem;"></i>
+                        <div>
+                            <h1>PRAGATI-AI - Admin Demo Portal</h1>
+                            <p style="opacity: 0.8; font-size: 0.875rem;">Predictive Real-time Allocation & Governance Assisted Talent Integrator</p>
+                            <p style="opacity: 0.7; font-size: 0.8rem;">Complete 12-Step System Monitoring & Live Demonstration</p>
+                        </div>
+                    </div>
+                    <div class="admin-controls">
+                        <div class="status-badge">
+                            <div class="pulse-dot"></div>
+                            System Online
+                        </div>
+                        <button class="btn btn-secondary" onclick="goHome()">
+                            <i class="fas fa-home"></i>
+                            Back to Home
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <main class="admin-content">
+            <div class="container">
+                <!-- System Overview -->
+                <section class="system-overview">
+                    <div class="system-card">
+                        <h3><i class="fas fa-server"></i> System Performance</h3>
+                        <div class="metric-grid">
+                            <div class="metric-item">
+                                <span class="metric-value" id="uptime">99.8%</span>
+                                <span class="metric-label">Uptime</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value" id="response-time">2.1s</span>
+                                <span class="metric-label">Avg Response</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value" id="active-users">1,247</span>
+                                <span class="metric-label">Active Users</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value" id="daily-matches">456</span>
+                                <span class="metric-label">Matches Today</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="system-card">
+                        <h3><i class="fas fa-chart-bar"></i> AI Performance</h3>
+                        <div class="metric-grid">
+                            <div class="metric-item">
+                                <span class="metric-value">94.7%</span>
+                                <span class="metric-label">Match Accuracy</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">91.8%</span>
+                                <span class="metric-label">Success Prediction</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">98.3%</span>
+                                <span class="metric-label">NLP Accuracy</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">0 Bias</span>
+                                <span class="metric-label">Bias Detected</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="system-card">
+                        <h3><i class="fas fa-balance-scale"></i> Equity Compliance</h3>
+                        <div class="metric-grid">
+                            <div class="metric-item">
+                                <span class="metric-value">26%</span>
+                                <span class="metric-label">Rural Students</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">16%</span>
+                                <span class="metric-label">SC/ST Quota</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">34%</span>
+                                <span class="metric-label">Female Participation</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">100%</span>
+                                <span class="metric-label">Compliance Rate</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Module Testing -->
+                <section class="module-testing">
+                    <h2><i class="fas fa-flask"></i> AI Module Testing & Monitoring</h2>
+                    <p style="opacity: 0.8;">Click on any module to test its functionality and view detailed performance metrics</p>
+                    
+                    <div class="module-grid">
+                        <div class="module-card" onclick="testModule(1)">
+                            <div class="module-icon" style="color: #3b82f6;">
+                                <i class="fas fa-user-graduate"></i>
+                            </div>
+                            <h4>Module 1</h4>
+                            <p style="font-size: 0.875rem; opacity: 0.8;">Profile Builder</p>
+                            <div class="module-status">
+                                <i class="fas fa-check-circle status-active"></i>
+                                <span class="status-active">Online - 98.7%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="module-card" onclick="testModule(2)">
+                            <div class="module-icon" style="color: #8b5cf6;">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <h4>Module 2</h4>
+                            <p style="font-size: 0.875rem; opacity: 0.8;">Industry Intelligence</p>
+                            <div class="module-status">
+                                <i class="fas fa-check-circle status-active"></i>
+                                <span class="status-active">Online - 99.2%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="module-card" onclick="testModule(3)">
+                            <div class="module-icon" style="color: #06b6d4;">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <h4>Module 3</h4>
+                            <p style="font-size: 0.875rem; opacity: 0.8;">Optimization Core</p>
+                            <div class="module-status">
+                                <i class="fas fa-check-circle status-active"></i>
+                                <span class="status-active">Online - 94.3%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="module-card" onclick="testModule(4)">
+                            <div class="module-icon" style="color: #10b981;">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h4>Module 4</h4>
+                            <p style="font-size: 0.875rem; opacity: 0.8;">Predictive Analytics</p>
+                            <div class="module-status">
+                                <i class="fas fa-check-circle status-active"></i>
+                                <span class="status-active">Online - 91.8%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="module-card" onclick="testModule(5)">
+                            <div class="module-icon" style="color: #f59e0b;">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
+                            <h4>Module 5</h4>
+                            <p style="font-size: 0.875rem; opacity: 0.8;">Learning System</p>
+                            <div class="module-status">
+                                <i class="fas fa-check-circle status-active"></i>
+                                <span class="status-active">Active - Learning</span>
+                            </div>
+                        </div>
+                        
+                        <div class="module-card" onclick="testModule(6)">
+                            <div class="module-icon" style="color: #ef4444;">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h4>Module 6</h4>
+                            <p style="font-size: 0.875rem; opacity: 0.8;">Communication Engine</p>
+                            <div class="module-status">
+                                <i class="fas fa-check-circle status-active"></i>
+                                <span class="status-active">Online - 96.5%</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Live Demo Section -->
+                <section class="demo-section">
+                    <h2><i class="fas fa-play-circle"></i> Live Demo Controls</h2>
+                    <p style="opacity: 0.8;">Test different aspects of the system in real-time</p>
+                    
+                    <div class="demo-controls">
+                        <button class="demo-btn" onclick="run12StepDemo()">
+                            <i class="fas fa-rocket"></i>
+                            Complete 12-Step Demo
+                        </button>
+                        <button class="demo-btn" onclick="testAllocation()">
+                            <i class="fas fa-balance-scale"></i>
+                            Quota-Aware Allocation
+                        </button>
+                        <button class="demo-btn" onclick="testMatching()">
+                            <i class="fas fa-target"></i>
+                            AI Matching Engine
+                        </button>
+                        <button class="demo-btn" onclick="checkBias()">
+                            <i class="fas fa-shield-alt"></i>
+                            Bias Detection Test
+                        </button>
+                        <button class="demo-btn" onclick="simulateReallocation()">
+                            <i class="fas fa-sync-alt"></i>
+                            Real-time Reallocation
+                        </button>
+                        <button class="demo-btn" onclick="showAuditTrail()">
+                            <i class="fas fa-list-alt"></i>
+                            Audit Trail
+                        </button>
+                        <button class="demo-btn" onclick="viewAnalytics()">
+                            <i class="fas fa-chart-bar"></i>
+                            Analytics Dashboard
+                        </button>
+                        <button class="demo-btn" onclick="clearConsole()">
+                            <i class="fas fa-trash"></i>
+                            Clear Console
+                        </button>
+                    </div>
+                    
+                    <div class="live-demo-area" id="demoConsole">
+                        <div class="console-line console-success">🚀 PRAGATI-AI - Admin Demo Console Initialized</div>
+                        <div class="console-line console-info">🇮🇳 Predictive Real-time Allocation & Governance Assisted Talent Integrator</div>
+                        <div class="console-line console-info">📈 System Status: All 6 AI modules online and operational</div>
+                        <div class="console-line console-info">🔍 Monitoring 1,247 active users across 28 states</div>
+                        <div class="console-line console-success">✅ Real-time bias detection: No bias detected - 100% quota compliance</div>
+                        <div class="console-line console-info">📈 Performance metrics: 94.7% match accuracy, 2.1s avg response</div>
+                        <div class="console-line console-success">⚖️ Affirmative action quotas: Rural 26%, SC/ST 16%, Female 34%</div>
+                        <div class="console-line console-info">🎯 Ready for complete 12-step system demonstration</div>
+                        <div class="console-line" style="color: #64748b;">─────────────────────────────────────────────────────────</div>
+                        <div class="console-line console-info">💡 Click "Complete 12-Step Demo" to see the full workflow!</div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        // Admin Demo JavaScript
+        let consoleCounter = 0;
+        
+        function goHome() {
+            window.location.href = '../index.html';
+        }
+        
+        function addConsoleMessage(message, type = 'info') {
+            const console = document.getElementById('demoConsole');
+            const line = document.createElement('div');
+            line.className = `console-line console-${type}`;
+            line.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            console.appendChild(line);
+            console.scrollTop = console.scrollHeight;
+        }
+        
+        function testModule(moduleNumber) {
+            const moduleNames = {
+                1: 'Intelligent Profile Builder',
+                2: 'Industry Intelligence Engine', 
+                3: 'Multi-Objective Optimization Core',
+                4: 'Predictive Success Analytics',
+                5: 'Dynamic Feedback & Learning System',
+                6: 'Smart Communication & Transparency Engine'
+            };
+            
+            addConsoleMessage(`🔬 Testing Module ${moduleNumber}: ${moduleNames[moduleNumber]}`, 'info');
+            
+            setTimeout(() => {
+                addConsoleMessage(`⚡ Module ${moduleNumber} - Running diagnostic tests...`, 'warning');
+            }, 500);
+            
+            setTimeout(() => {
+                addConsoleMessage(`✅ Module ${moduleNumber} - All tests passed! Performance: ${(Math.random() * 10 + 90).toFixed(1)}%`, 'success');
+            }, 1500);
+        }
+        
+        function run12StepDemo() {
+            addConsoleMessage('🚀 Starting complete 12-step PRAGATI-AI demonstration...', 'info');
+            
+            const steps = [
+                { step: 1, name: 'Landing & Role Selection', message: 'Student selects role and initiates registration', delay: 800 },
+                { step: 2, name: 'Student Onboarding', message: 'Profile creation with personal and demographic data', delay: 1000 },
+                { step: 3, name: 'Resume Analysis', message: 'NLP engine extracts skills and experience from resume', delay: 1200 },
+                { step: 4, name: 'Skill Verification', message: 'Optional micro-tests validate claimed skills', delay: 900 },
+                { step: 5, name: 'Employer Posts Internship', message: 'Company creates position with quota requirements', delay: 800 },
+                { step: 6, name: 'Semantic Matching', message: 'AI computes candidate-internship compatibility scores', delay: 1500 },
+                { step: 7, name: 'Quota-Aware Allocation', message: 'Constraint solver ensures affirmative action compliance', delay: 1300 },
+                { step: 8, name: 'Explainability Engine', message: 'System generates transparent match reasoning', delay: 1000 },
+                { step: 9, name: 'Notification & Acceptance', message: 'Candidates notified, acceptance/decline tracked', delay: 800 },
+                { step: 10, name: 'Real-time Reallocation', message: 'Declined positions automatically reassigned', delay: 1100 },
+                { step: 11, name: 'Employer Verification', message: 'Companies conduct interviews and assessments', delay: 900 },
+                { step: 12, name: 'Feedback & Learning', message: 'System learns from outcomes to improve future matching', delay: 1000 }
+            ];
+            
+            let currentStep = 0;
+            
+            function executeStep() {
+                if (currentStep >= steps.length) {
+                    addConsoleMessage('🎉 Complete 12-step workflow demonstration finished!', 'success');
+                    addConsoleMessage('⚖️ Final Result: 100% quota compliance, 94.7% match accuracy', 'success');
+                    return;
+                }
+                
+                const step = steps[currentStep];
+                addConsoleMessage(`🔍 Step ${step.step}: ${step.name} - ${step.message}`, currentStep % 3 === 0 ? 'success' : 'info');
+                
+                currentStep++;
+                setTimeout(executeStep, step.delay);
+            }
+            
+            setTimeout(executeStep, 500);
+        }
+        
+        function testMatching() {
+            addConsoleMessage('🎯 Testing AI matching engine with live data...', 'info');
+            
+            setTimeout(() => {
+                addConsoleMessage('📝 Processing 156 student profiles from current batch...', 'info');
+            }, 500);
+            
+            setTimeout(() => {
+                addConsoleMessage('🏢 Analyzing 47 active internship opportunities...', 'info');
+            }, 1000);
+            
+            setTimeout(() => {
+                addConsoleMessage('🤖 Hybrid algorithm (Collaborative Filtering + Genetic) running...', 'info');
+            }, 1500);
+            
+            setTimeout(() => {
+                addConsoleMessage('⚡ Algorithm converged in 2.1 seconds with optimal solution', 'success');
+            }, 2500);
+            
+            setTimeout(() => {
+                addConsoleMessage('✅ Generated 134 high-quality matches (avg score: 91.8%)', 'success');
+            }, 3000);
+            
+            setTimeout(() => {
+                addConsoleMessage('⚖️ All quota constraints satisfied during matching', 'success');
+            }, 3500);
+        }
+        
+        function simulateLoad() {
+            addConsoleMessage('⚡ Simulating high system load...', 'warning');
+            
+            setTimeout(() => {
+                addConsoleMessage('📈 Load increased to 10,000 concurrent users', 'warning');
+            }, 500);
+            
+            setTimeout(() => {
+                addConsoleMessage('🔄 Auto-scaling triggered - spinning up additional servers', 'info');
+            }, 1000);
+            
+            setTimeout(() => {
+                addConsoleMessage('✅ System scaled successfully - performance stabilized', 'success');
+            }, 2000);
+        }
+        
+        function checkBias() {
+            addConsoleMessage('⚖️  Running comprehensive bias detection analysis...', 'info');
+            
+            setTimeout(() => {
+                addConsoleMessage('🔍 Analyzing 5,000 recent matches across all demographics', 'info');
+            }, 500);
+            
+            setTimeout(() => {
+                addConsoleMessage('📊 Rural students: 26.3% (Target: 25%) ✅', 'success');
+            }, 1000);
+            
+            setTimeout(() => {
+                addConsoleMessage('📊 SC/ST representation: 16.1% (Target: 15%) ✅', 'success');
+            }, 1500);
+            
+            setTimeout(() => {
+                addConsoleMessage('📊 Female participation: 34.2% (Target: 30%) ✅', 'success');
+            }, 2000);
+            
+            setTimeout(() => {
+                addConsoleMessage('✅ No bias detected - system maintaining fair representation', 'success');
+            }, 2500);
+        }
+        
+        function viewAnalytics() {
+            addConsoleMessage('📊 Generating real-time analytics dashboard...', 'info');
+            
+            setTimeout(() => {
+                addConsoleMessage('📈 Success Rate Trend: 89.2% → 91.8% → 94.7% (Improving)', 'success');
+            }, 500);
+            
+            setTimeout(() => {
+                addConsoleMessage('🎯 Most Demanded Skills: Python (67%), Java (54%), React (43%)', 'info');
+            }, 1000);
+            
+            setTimeout(() => {
+                addConsoleMessage('🏢 Top Performing Companies: Microsoft (96% success), TCS (89%), Google (94%)', 'info');
+            }, 1500);
+            
+            setTimeout(() => {
+                addConsoleMessage('🌍 Geographic Distribution: Maharashtra (23%), Karnataka (18%), Delhi (12%)', 'info');
+            }, 2000);
+        }
+        
+        function clearConsole() {
+            const console = document.getElementById('demoConsole');
+            console.innerHTML = '<div class="console-line console-info">🧹 Console cleared - Ready for new demonstrations</div>';
+        }
+        
+        // Auto-update metrics
+        function updateMetrics() {
+            const elements = {
+                'active-users': () => Math.floor(Math.random() * 50) + 1200,
+                'daily-matches': () => Math.floor(Math.random() * 20) + 440,
+                'response-time': () => (Math.random() * 0.5 + 1.8).toFixed(1) + 's'
+            };
+            
+            Object.keys(elements).forEach(id => {
+                const element = document.getElementById(id);
+                if (element && typeof elements[id] === 'function') {
+                    element.textContent = elements[id]();
+                }
+            });
+        }
+        
+        // Start auto-updates
+        setInterval(updateMetrics, 5000);
+        
+        // New Admin Demo Functions
+        function testAllocation() {
+            addConsoleMessage('⚖️ Testing quota-aware allocation system...', 'info');
+            
+            setTimeout(() => {
+                addConsoleMessage('📊 Loading 89 candidates and 12 internship positions...', 'info');
+            }, 500);
+            
+            setTimeout(() => {
+                addConsoleMessage('📝 Quota requirements: Rural 25%, SC/ST 22.5%, Female 30%', 'info');
+            }, 1000);
+            
+            setTimeout(() => {
+                addConsoleMessage('🤖 Multi-objective optimization engine processing...', 'info');
+            }, 1500);
+            
+            setTimeout(() => {
+                addConsoleMessage('✅ Allocation complete: All quotas satisfied!', 'success');
+                addConsoleMessage('📈 Rural students: 26% (target: 25%) ✅', 'success');
+                addConsoleMessage('📈 SC/ST candidates: 23% (target: 22.5%) ✅', 'success');
+                addConsoleMessage('📈 Female candidates: 31% (target: 30%) ✅', 'success');
+            }, 2500);
+        }
+        
+        function simulateReallocation() {
+            addConsoleMessage('🔄 Simulating real-time reallocation scenario...', 'info');
+            
+            setTimeout(() => {
+                addConsoleMessage('🚨 Alert: Candidate "Priya Sharma" declined TCS internship offer', 'warning');
+            }, 800);
+            
+            setTimeout(() => {
+                addConsoleMessage('🔍 Scanning waitlist for next best candidate...', 'info');
+            }, 1500);
+            
+            setTimeout(() => {
+                addConsoleMessage('🎯 Found replacement: "Arjun Kumar" (94% match, rural background)', 'info');
+            }, 2200);
+            
+            setTimeout(() => {
+                addConsoleMessage('✅ Reallocation complete! Quota compliance maintained.', 'success');
+                addConsoleMessage('📧 Notification sent to Arjun Kumar automatically', 'success');
+            }, 2800);
+        }
+        
+        function showAuditTrail() {
+            addConsoleMessage('📜 Generating audit trail for transparency...', 'info');
+            
+            setTimeout(() => {
+                addConsoleMessage('🔍 Audit ID: PRAG-2024-' + Math.floor(Math.random() * 10000), 'info');
+            }, 500);
+            
+            setTimeout(() => {
+                addConsoleMessage('📅 Timestamp: ' + new Date().toISOString(), 'info');
+            }, 800);
+            
+            setTimeout(() => {
+                addConsoleMessage('🔍 Algorithm version: PRAGATI-AI v2.1.3', 'info');
+                addConsoleMessage('📈 Decision factors logged: Skills (60%), Location (20%), Quota (15%), Performance (5%)', 'info');
+                addConsoleMessage('⚖️ Bias check: PASSED - No discriminatory patterns detected', 'success');
+                addConsoleMessage('🔒 Immutable record created on government blockchain', 'success');
+            }, 1200);
+        }
+        
+        // Welcome message
+        setTimeout(() => {
+            addConsoleMessage('👋 Welcome to PRAGATI-AI Admin Demo! Ready to showcase our AI capabilities.', 'success');
+        }, 2000);
+    </script>
+</body>
+</html>

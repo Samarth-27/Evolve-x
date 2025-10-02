@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal - PRAGATI-AI</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="student-portal-enhanced.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .student-portal {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+        
+        .portal-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .portal-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 2rem;
+        }
+        
+        .portal-header h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .portal-header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        .portal-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .auth-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .auth-tab {
+            background: transparent;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #64748b;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .auth-tab.active {
+            color: #6366f1;
+            border-bottom-color: #6366f1;
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            background: #f1f5f9;
+            color: #64748b;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+        
+        .step.active {
+            background: #6366f1;
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .step.completed {
+            background: #10b981;
+            color: white;
+        }
+        
+        .step-number {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            background: white;
+            box-sizing: border-box;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .radio-option input[type="radio"] {
+            accent-color: #6366f1;
+        }
+        
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            transition: background 0.2s ease;
+        }
+        
+        .checkbox-option:hover {
+            background: #f8fafc;
+        }
+        
+        .checkbox-option input[type="checkbox"] {
+            accent-color: #6366f1;
+        }
+        
+        .upload-area {
+            border: 2px dashed #6366f1;
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            background: rgba(99, 102, 241, 0.05);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .upload-area:hover {
+            border-color: #4f46e5;
+            background: rgba(99, 102, 241, 0.1);
+        }
+        
+        /* Premium Features Styling */
+        .premium-features {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 1rem;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .premium-features h4 {
+            text-align: center;
+            color: #1e293b;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .premium-features h4 i {
+            color: #fbbf24;
+        }
+        
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .feature-card:hover::before {
+            left: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-color: #6366f1;
+        }
+        
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .feature-card h5 {
+            margin: 0 0 0.5rem 0;
+            color: #1e293b;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        
+        .feature-card p {
+            margin: 0 0 1rem 0;
+            color: #64748b;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .feature-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .feature-badge:nth-of-type(2) {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+        
+        .feature-badge:nth-of-type(3) {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        
+        .upload-area.dragover {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+        }
+        
+        .upload-area i {
+            font-size: 1.75rem;
+            color: #6366f1;
+            margin-bottom: 1rem;
+        }
+        
+        .upload-area h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .upload-area p {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+        
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .progress-bar {
+            flex: 1;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #34d399);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .analysis-results {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .skill-tag {
+            background: #6366f1;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .skill-tag.hidden {
+            background: #f59e0b;
+        }
+        
+        .skill-tag.career {
+            background: #10b981;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #6366f1;
+            color: #6366f1;
+        }
+        
+        .btn-outline:hover {
+            background: #6366f1;
+            color: white;
+        }
+        
+        .matching-animation {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e2e8f0;
+            border-top: 4px solid #6366f1;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .match-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #6366f1;
+            transition: all 0.3s ease;
+        }
+        
+        .match-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .match-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+        
+        .match-score {
+            background: #10b981;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .match-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .match-detail {
+            text-align: center;
+            padding: 0.5rem;
+            background: #f8fafc;
+            border-radius: 0.5rem;
+        }
+        
+        .match-detail .value {
+            font-weight: 600;
+            color: #6366f1;
+        }
+        
+        .match-detail .label {
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: rgba(99, 102, 241, 0.05);
+            border-radius: 0.75rem;
+        }
+        
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #6366f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        
+        .logout-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(239, 68, 68, 0.1);
+            border: none;
+            color: #ef4444;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .logout-btn:hover {
+            background: #ef4444;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .radio-group, .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="student-portal">
+        <div class="portal-container">
+            <div class="portal-header">
+                <h1>🎓 Student Portal - PRAGATI-AI</h1>
+                <p>Predictive Real-time Allocation & Governance Assisted Talent Integrator</p>
+                <p style="font-size: 0.9rem; opacity: 0.9; margin-top: 0.5rem;">🇮🇳 Your Gateway to Perfect Internship Matches under PM Internship Scheme</p>
+            </div>
+            
+            <!-- Login/Register Section -->
+            <div id="auth-section" class="portal-card">
+                <h2 style="text-align: center; margin-bottom: 2rem; color: #1e293b; font-size: 1.5rem; font-weight: 600;">Welcome Back!</h2>
+                
+                <div class="auth-tabs">
+                    <button class="auth-tab active" onclick="showLogin()" id="login-tab">Login</button>
+                    <button class="auth-tab" onclick="showRegister()" id="register-tab">Register</button>
+                </div>
+                
+                <!-- Login Form -->
+                <div id="login-form">
+                    <form onsubmit="handleLogin(event)">
+                        <div class="form-group">
+                            <label for="login-email">Email Address</label>
+                            <input type="email" id="login-email" class="form-control" required placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" class="form-control" required placeholder="Enter your password">
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Login to Portal
+                        </button>
+                        <p style="text-align: center; color: #64748b;">
+                            Demo Credentials: <strong>demo@student.com</strong> / <strong>password123</strong>
+                        </p>
+                    </form>
+                </div>
+                
+                <!-- Register Form -->
+                <div id="register-form" style="display: none;">
+                    <form onsubmit="handleRegister(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="reg-firstname">First Name</label>
+                                <input type="text" id="reg-firstname" class="form-control" required placeholder="Enter first name">
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-lastname">Last Name</label>
+                                <input type="text" id="reg-lastname" class="form-control" required placeholder="Enter last name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-email">Email Address</label>
+                            <input type="email" id="reg-email" class="form-control" required placeholder="Enter your email">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="reg-password">Password</label>
+                                <input type="password" id="reg-password" class="form-control" required placeholder="Create password">
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-confirm">Confirm Password</label>
+                                <input type="password" id="reg-confirm" class="form-control" required placeholder="Confirm password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" required>
+                                I agree to the <a href="#" style="color: #6366f1;">Terms and Conditions</a>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <i class="fas fa-user-plus"></i>
+                            Create Account
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Main Portal Content -->
+            <div id="portal-content" style="display: none;">
+                <div class="logout-btn" onclick="handleLogout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </div>
+                
+                <!-- Step Indicator -->
+                <div class="step-indicator">
+                    <div class="step active" id="step-1">
+                        <div class="step-number">1</div>
+                        <span>Basic Info</span>
+                    </div>
+                    <div class="step" id="step-2">
+                        <div class="step-number">2</div>
+                        <span>Education</span>
+                    </div>
+                    <div class="step" id="step-3">
+                        <div class="step-number">3</div>
+                        <span>Skills & Interests</span>
+                    </div>
+                    <div class="step" id="step-4">
+                        <div class="step-number">4</div>
+                        <span>AI Analysis</span>
+                    </div>
+                    <div class="step" id="step-5">
+                        <div class="step-number">5</div>
+                        <span>Matches</span>
+                    </div>
+                </div>
+                
+                <!-- Step 1: Basic Information -->
+                <div id="step-1-content" class="portal-card">
+                    <div class="user-info">
+                        <div class="user-avatar" id="user-avatar">S</div>
+                        <div>
+                            <h3 id="user-name">Student Name</h3>
+                            <p style="color: #64748b; margin: 0;" id="user-email">student@email.com</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Resume Upload (moved to Step 1) -->
+                    <div class="form-group">
+                        <label>Upload Your Resume to Auto-fill Details</label>
+                        <div class="upload-area" id="resume-upload-area" onclick="triggerFileUpload()">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <h4>Drop your resume here or click to browse</h4>
+                            <p>Supports PDF, DOCX (Max: 5MB)</p>
+                            <input type="file" id="resume-file" accept=".pdf,.doc,.docx" style="display: none;">
+                        </div>
+                        <div id="file-info" class="file-info" style="display: none;">
+                            <i class="fas fa-file-alt" style="font-size: 1.5rem; color: #10b981;"></i>
+                            <div style="flex: 1;">
+                                <div id="file-name" style="font-weight: 600;"></div>
+                                <div id="file-size" style="color: #64748b; font-size: 0.875rem;"></div>
+                            </div>
+                            <button type="button" onclick="removeFile()" style="background: none; border: none; color: #ef4444; cursor: pointer;">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div id="upload-progress" style="display: none; margin-top: 1rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                <span>Uploading...</span>
+                                <span id="progress-text">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 style="color: #1e293b; margin-bottom: 1.5rem; font-size: 1.25rem; font-weight: 600;">📋 Basic Information</h3>
+                    
+                    <form id="basic-info-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" class="form-control" required placeholder="+91 9876543210">
+                            </div>
+                            <div class="form-group">
+                                <label for="dob">Date of Birth</label>
+                                <input type="date" id="dob" class="form-control" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Gender</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="male" name="gender" value="male" required>
+                                    <label for="male">Male</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="female" name="gender" value="female" required>
+                                    <label for="female">Female</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="other" name="gender" value="other" required>
+                                    <label for="other">Other</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="state">State</label>
+                                <select id="state" class="form-control" required onchange="updateDistricts()">
+                                    <option value="">Select State</option>
+                                    <option value="maharashtra">Maharashtra</option>
+                                    <option value="karnataka">Karnataka</option>
+                                    <option value="delhi">Delhi</option>
+                                    <option value="gujarat">Gujarat</option>
+                                    <option value="rajasthan">Rajasthan</option>
+                                    <option value="punjab">Punjab</option>
+                                    <option value="haryana">Haryana</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="district">District</label>
+                                <select id="district" class="form-control" required>
+                                    <option value="">Select District</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="pincode">Pincode</label>
+                                <input type="text" id="pincode" class="form-control" required placeholder="400001" pattern="[0-9]{6}">
+                            </div>
+                            <div class="form-group">
+                                <label>Area Type</label>
+                                <div class="radio-group">
+                                    <div class="radio-option">
+                                        <input type="radio" id="urban" name="area-type" value="urban" required>
+                                        <label for="urban">Urban</label>
+                                    </div>
+                                    <div class="radio-option">
+                                        <input type="radio" id="rural" name="area-type" value="rural" required>
+                                        <label for="rural">Rural</label>
+                                    </div>
+                                    <div class="radio-option">
+                                        <input type="radio" id="semi-urban" name="area-type" value="semi-urban" required>
+                                        <label for="semi-urban">Semi-Urban</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Category (For Affirmative Action)</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="general" name="category" value="general" required>
+                                    <label for="general">General</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="obc" name="category" value="obc" required>
+                                    <label for="obc">OBC</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="sc" name="category" value="sc" required>
+                                    <label for="sc">SC</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="st" name="category" value="st" required>
+                                    <label for="st">ST</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="ews" name="category" value="ews" required>
+                                    <label for="ews">EWS</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <div class="navigation-buttons">
+                        <button class="btn btn-outline" onclick="goHome()">
+                            <i class="fas fa-home"></i>
+                            Back to Home
+                        </button>
+                        <button class="btn btn-primary" onclick="nextStep(2)">
+                            Next: Education Details
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- PRAGATI-AI Premium Features -->
+                    <div class="premium-features">
+                        <h4><i class="fas fa-star"></i> PRAGATI-AI Premium Features</h4>
+                        <div class="feature-cards">
+                            <div class="feature-card" onclick="openAIInterviewer()">
+                                <div class="feature-icon">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <h5>AI Interview Assistant</h5>
+                                <p>Practice with our AI-powered virtual interviewer</p>
+                                <span class="feature-badge">NEW</span>
+                            </div>
+                            
+                            <div class="feature-card" onclick="openSkillGapAnalysis()">
+                                <div class="feature-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <h5>Skill Gap Analysis</h5>
+                                <p>Get personalized learning recommendations</p>
+                                <span class="feature-badge">HOT</span>
+                            </div>
+                            
+                            <div class="feature-card" onclick="openGamificationDashboard()">
+                                <div class="feature-icon">
+                                    <i class="fas fa-trophy"></i>
+                                </div>
+                                <h5>Achievement Dashboard</h5>
+                                <p>Track your progress with XP, badges & leaderboards</p>
+                                <span class="feature-badge">FUN</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Other steps will be shown/hidden dynamically -->
+                <!-- Step 2, 3, 4, 5 content will be added by JavaScript -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Details Modal -->
+    <div id="details-modal-overlay" class="modal-overlay" onclick="closeDetailsModal(event)">
+        <div class="modal" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Internship Details</h3>
+                <button class="modal-close" onclick="closeDetailsModal(event)">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Filled by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Confirmation Modal -->
+    <div id="action-modal-overlay" class="modal-overlay" onclick="closeActionModal(event)">
+        <div class="modal modal-sm" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h3 class="modal-title" id="action-modal-title">Confirm Action</h3>
+                <button class="modal-close" onclick="closeActionModal(event)">&times;</button>
+            </div>
+            <div class="modal-body" id="action-modal-body">
+                <!-- Filled by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Feedback Modal -->
+    <div id="feedback-modal-overlay" class="modal-overlay" onclick="closeFeedbackModal(event)">
+        <div class="modal" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h3 class="modal-title" id="feedback-modal-title">Provide Feedback</h3>
+                <button class="modal-close" onclick="closeFeedbackModal(event)">&times;</button>
+            </div>
+            <div class="modal-body" id="feedback-modal-body">
+                <!-- Filled by JS -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/mammoth/mammoth.browser.min.js"></script>
+    <script src="student-portal.js"></script>
+</body>
+</html>

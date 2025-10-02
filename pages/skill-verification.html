@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Verification - PRAGATI-AI</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .skill-portal {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem 0;
+            color: white;
+        }
+        
+        .portal-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .portal-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .portal-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .verification-card {
+            background: rgba(255, 255, 255, 0.95);
+            color: #1e293b;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            margin-bottom: 2rem;
+        }
+        
+        .skill-selector {
+            margin-bottom: 2rem;
+        }
+        
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .skill-option {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .skill-option:hover {
+            border-color: #6366f1;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+        }
+        
+        .skill-option.selected {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+        }
+        
+        .skill-option .skill-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #6366f1;
+        }
+        
+        .skill-option.selected .skill-icon {
+            color: #10b981;
+        }
+        
+        .test-interface {
+            display: none;
+        }
+        
+        .question-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #6366f1;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .question-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .question-number {
+            background: #6366f1;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 1rem 0;
+            color: #1e293b;
+        }
+        
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin: 1rem 0;
+        }
+        
+        .option {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .option:hover {
+            border-color: #6366f1;
+            background: rgba(99, 102, 241, 0.05);
+        }
+        
+        .option.selected {
+            border-color: #6366f1;
+            background: rgba(99, 102, 241, 0.1);
+        }
+        
+        .option.correct {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+        }
+        
+        .option.incorrect {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+        
+        .option-label {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #6366f1;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        .timer {
+            background: #f59e0b;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 1rem;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #34d399);
+            transition: width 0.5s ease;
+        }
+        
+        .results-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            display: none;
+        }
+        
+        .score-display {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #10b981;
+            margin: 1rem 0;
+        }
+        
+        .badge {
+            background: #10b981;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1rem;
+        }
+        
+        .badge.bronze {
+            background: #cd7f32;
+        }
+        
+        .badge.silver {
+            background: #c0c0c0;
+        }
+        
+        .badge.gold {
+            background: #ffd700;
+            color: #1e293b;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background: #6366f1;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5b21b6;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="skill-portal">
+        <div class="portal-container">
+            <div class="portal-header">
+                <h1>🎯 Skill Verification - PRAGATI-AI</h1>
+                <p>Validate your skills with AI-powered micro-assessments</p>
+                <p style="font-size: 0.9rem; opacity: 0.9;">Earn verified badges to strengthen your profile and improve match quality</p>
+            </div>
+            
+            <!-- Skill Selection -->
+            <div id="skill-selection" class="verification-card">
+                <h2>Select Skills to Verify</h2>
+                <p>Choose up to 3 skills you'd like to get verified. Each test takes 3-5 minutes.</p>
+                
+                <div class="skill-selector">
+                    <div class="skill-grid">
+                        <div class="skill-option" onclick="toggleSkill(this, 'JavaScript')">
+                            <div class="skill-icon">💻</div>
+                            <h4>JavaScript</h4>
+                            <p>Fundamentals & ES6+</p>
+                        </div>
+                        <div class="skill-option" onclick="toggleSkill(this, 'Python')">
+                            <div class="skill-icon">🐍</div>
+                            <h4>Python</h4>
+                            <p>Basic Programming</p>
+                        </div>
+                        <div class="skill-option" onclick="toggleSkill(this, 'React')">
+                            <div class="skill-icon">⚛️</div>
+                            <h4>React</h4>
+                            <p>Components & Hooks</p>
+                        </div>
+                        <div class="skill-option" onclick="toggleSkill(this, 'SQL')">
+                            <div class="skill-icon">🗄️</div>
+                            <h4>SQL</h4>
+                            <p>Database Queries</p>
+                        </div>
+                        <div class="skill-option" onclick="toggleSkill(this, 'Machine Learning')">
+                            <div class="skill-icon">🧠</div>
+                            <h4>Machine Learning</h4>
+                            <p>Basic Concepts</p>
+                        </div>
+                        <div class="skill-option" onclick="toggleSkill(this, 'UI/UX Design')">
+                            <div class="skill-icon">🎨</div>
+                            <h4>UI/UX Design</h4>
+                            <p>Design Principles</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-secondary" onclick="goBack()">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Portal
+                    </button>
+                    <button class="btn btn-primary" onclick="startVerification()" id="start-btn" disabled>
+                        <i class="fas fa-play"></i>
+                        Start Verification (<span id="selected-count">0</span>/3)
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Test Interface -->
+            <div id="test-interface" class="test-interface">
+                <div class="verification-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <h2 id="current-skill">JavaScript Verification</h2>
+                        <div class="timer" id="timer">
+                            <i class="fas fa-clock"></i>
+                            <span id="time-remaining">5:00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="test-progress" style="width: 0%"></div>
+                    </div>
+                    <p style="text-align: center; margin: 0.5rem 0;">Question <span id="current-q">1</span> of <span id="total-q">3</span></p>
+                    
+                    <div id="question-container">
+                        <!-- Questions will be populated here -->
+                    </div>
+                    
+                    <div class="navigation-buttons">
+                        <button class="btn btn-secondary" onclick="previousQuestion()" id="prev-btn" disabled>
+                            <i class="fas fa-arrow-left"></i>
+                            Previous
+                        </button>
+                        <button class="btn btn-primary" onclick="nextQuestion()" id="next-btn">
+                            Next Question
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Results -->
+            <div id="results" class="verification-card results-card">
+                <h2>🎉 Verification Complete!</h2>
+                <div id="results-container">
+                    <!-- Results will be populated here -->
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-secondary" onclick="retakeTest()">
+                        <i class="fas fa-redo"></i>
+                        Retake Tests
+                    </button>
+                    <button class="btn btn-success" onclick="saveResults()">
+                        <i class="fas fa-save"></i>
+                        Save to Profile
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let selectedSkills = [];
+        let currentSkillIndex = 0;
+        let currentQuestionIndex = 0;
+        let testResults = {};
+        let timer;
+        let timeRemaining = 300; // 5 minutes per skill
+        
+        const skillQuestions = {
+            'JavaScript': [
+                {
+                    question: "What will be the output of the following code?",
+                    code: "console.log(typeof null);",
+                    options: ["null", "undefined", "object", "boolean"],
+                    correct: 2
+                },
+                {
+                    question: "Which method is used to add an element to the end of an array?",
+                    options: ["push()", "add()", "append()", "insert()"],
+                    correct: 0
+                },
+                {
+                    question: "What does the '===' operator check?",
+                    options: ["Value only", "Type only", "Both value and type", "Neither value nor type"],
+                    correct: 2
+                }
+            ],
+            'Python': [
+                {
+                    question: "What will this code output?",
+                    code: "print(type([1, 2, 3]))",
+                    options: ["<class 'array'>", "<class 'list'>", "<class 'tuple'>", "<class 'dict'>"],
+                    correct: 1
+                },
+                {
+                    question: "Which keyword is used to define a function in Python?",
+                    options: ["function", "def", "func", "define"],
+                    correct: 1
+                },
+                {
+                    question: "What is the correct way to create a dictionary?",
+                    options: ["{key: value}", "{key = value}", "(key: value)", "[key: value]"],
+                    correct: 0
+                }
+            ],
+            'React': [
+                {
+                    question: "What is JSX?",
+                    options: ["JavaScript XML", "Java Syntax Extension", "JSON eXtended", "JavaScript eXtension"],
+                    correct: 0
+                },
+                {
+                    question: "Which hook is used for managing component state?",
+                    options: ["useEffect", "useState", "useContext", "useReducer"],
+                    correct: 1
+                },
+                {
+                    question: "How do you pass data from parent to child component?",
+                    options: ["Through state", "Through props", "Through context", "Through refs"],
+                    correct: 1
+                }
+            ],
+            'SQL': [
+                {
+                    question: "Which SQL command is used to retrieve data from a database?",
+                    options: ["SELECT", "GET", "FETCH", "RETRIEVE"],
+                    correct: 0
+                },
+                {
+                    question: "What does the WHERE clause do?",
+                    options: ["Sorts results", "Filters results", "Groups results", "Counts results"],
+                    correct: 1
+                },
+                {
+                    question: "Which JOIN returns all records from both tables?",
+                    options: ["INNER JOIN", "LEFT JOIN", "RIGHT JOIN", "FULL OUTER JOIN"],
+                    correct: 3
+                }
+            ],
+            'Machine Learning': [
+                {
+                    question: "What is supervised learning?",
+                    options: ["Learning without labeled data", "Learning with labeled data", "Learning by trial and error", "Learning through observation"],
+                    correct: 1
+                },
+                {
+                    question: "Which algorithm is used for classification?",
+                    options: ["Linear Regression", "K-Means", "Decision Tree", "PCA"],
+                    correct: 2
+                },
+                {
+                    question: "What is overfitting?",
+                    options: ["Model performs well on training data but poorly on new data", "Model performs poorly on all data", "Model is too simple", "Model has too few parameters"],
+                    correct: 0
+                }
+            ],
+            'UI/UX Design': [
+                {
+                    question: "What does UX stand for?",
+                    options: ["User eXperience", "User eXchange", "Universal eXperience", "Unified eXperience"],
+                    correct: 0
+                },
+                {
+                    question: "Which principle emphasizes the most important elements?",
+                    options: ["Contrast", "Hierarchy", "Alignment", "Repetition"],
+                    correct: 1
+                },
+                {
+                    question: "What is a wireframe?",
+                    options: ["Final design", "Low-fidelity structural blueprint", "Color palette", "Typography guide"],
+                    correct: 1
+                }
+            ]
+        };
+        
+        function toggleSkill(element, skillName) {
+            if (element.classList.contains('selected')) {
+                element.classList.remove('selected');
+                selectedSkills = selectedSkills.filter(skill => skill !== skillName);
+            } else {
+                if (selectedSkills.length < 3) {
+                    element.classList.add('selected');
+                    selectedSkills.push(skillName);
+                } else {
+                    showNotification('You can select maximum 3 skills for verification', 'warning');
+                    return;
+                }
+            }
+            
+            updateStartButton();
+        }
+        
+        function updateStartButton() {
+            const startBtn = document.getElementById('start-btn');
+            const countSpan = document.getElementById('selected-count');
+            
+            countSpan.textContent = selectedSkills.length;
+            
+            if (selectedSkills.length > 0) {
+                startBtn.disabled = false;
+                startBtn.classList.remove('btn-disabled');
+            } else {
+                startBtn.disabled = true;
+                startBtn.classList.add('btn-disabled');
+            }
+        }
+        
+        function startVerification() {
+            if (selectedSkills.length === 0) return;
+            
+            document.getElementById('skill-selection').style.display = 'none';
+            document.getElementById('test-interface').style.display = 'block';
+            
+            currentSkillIndex = 0;
+            currentQuestionIndex = 0;
+            testResults = {};
+            
+            startSkillTest();
+        }
+        
+        function startSkillTest() {
+            const currentSkill = selectedSkills[currentSkillIndex];
+            document.getElementById('current-skill').textContent = `${currentSkill} Verification`;
+            
+            timeRemaining = 300; // 5 minutes
+            startTimer();
+            
+            currentQuestionIndex = 0;
+            showQuestion();
+        }
+        
+        function showQuestion() {
+            const currentSkill = selectedSkills[currentSkillIndex];
+            const questions = skillQuestions[currentSkill];
+            const question = questions[currentQuestionIndex];
+            
+            document.getElementById('current-q').textContent = currentQuestionIndex + 1;
+            document.getElementById('total-q').textContent = questions.length;
+            
+            const progress = ((currentQuestionIndex) / questions.length) * 100;
+            document.getElementById('test-progress').style.width = progress + '%';
+            
+            const container = document.getElementById('question-container');
+            container.innerHTML = `
+                <div class="question-card">
+                    <div class="question-header">
+                        <div class="question-number">${currentQuestionIndex + 1}</div>
+                    </div>
+                    <div class="question-text">${question.question}</div>
+                    ${question.code ? `<div class="code-block">${question.code}</div>` : ''}
+                    <div class="options">
+                        ${question.options.map((option, index) => `
+                            <div class="option" onclick="selectOption(${index})">
+                                <div class="option-label">${String.fromCharCode(65 + index)}</div>
+                                <span>${option}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            updateNavigationButtons();
+        }
+        
+        function selectOption(optionIndex) {
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => option.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+            
+            const currentSkill = selectedSkills[currentSkillIndex];
+            if (!testResults[currentSkill]) {
+                testResults[currentSkill] = {};
+            }
+            testResults[currentSkill][currentQuestionIndex] = optionIndex;
+            
+            document.getElementById('next-btn').disabled = false;
+        }
+        
+        function nextQuestion() {
+            const currentSkill = selectedSkills[currentSkillIndex];
+            const questions = skillQuestions[currentSkill];
+            
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                showQuestion();
+            } else {
+                // Skill test complete
+                if (currentSkillIndex < selectedSkills.length - 1) {
+                    currentSkillIndex++;
+                    startSkillTest();
+                } else {
+                    // All tests complete
+                    showResults();
+                }
+            }
+        }
+        
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuestion();
+            }
+        }
+        
+        function updateNavigationButtons() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            
+            prevBtn.disabled = currentQuestionIndex === 0;
+            nextBtn.disabled = true; // Enabled when option is selected
+        }
+        
+        function startTimer() {
+            clearInterval(timer);
+            timer = setInterval(() => {
+                timeRemaining--;
+                
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                document.getElementById('time-remaining').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeRemaining <= 0) {
+                    clearInterval(timer);
+                    // Auto-submit current test
+                    nextQuestion();
+                }
+            }, 1000);
+        }
+        
+        function showResults() {
+            clearInterval(timer);
+            
+            document.getElementById('test-interface').style.display = 'none';
+            document.getElementById('results').style.display = 'block';
+            
+            const container = document.getElementById('results-container');
+            let totalScore = 0;
+            let totalQuestions = 0;
+            let resultsHTML = '';
+            
+            selectedSkills.forEach(skill => {
+                const questions = skillQuestions[skill];
+                const answers = testResults[skill] || {};
+                
+                let correctAnswers = 0;
+                questions.forEach((question, index) => {
+                    if (answers[index] === question.correct) {
+                        correctAnswers++;
+                    }
+                });
+                
+                const score = Math.round((correctAnswers / questions.length) * 100);
+                totalScore += score;
+                totalQuestions += questions.length;
+                
+                let badge = 'bronze';
+                let badgeText = 'Attempted';
+                if (score >= 90) {
+                    badge = 'gold';
+                    badgeText = 'Expert';
+                } else if (score >= 70) {
+                    badge = 'silver';
+                    badgeText = 'Proficient';
+                } else if (score >= 50) {
+                    badge = 'bronze';
+                    badgeText = 'Basic';
+                } else {
+                    badgeText = 'Needs Practice';
+                }
+                
+                resultsHTML += `
+                    <div style="background: white; padding: 1.5rem; border-radius: 0.75rem; margin-bottom: 1rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h3>${skill}</h3>
+                            <div class="badge ${badge}">
+                                <i class="fas fa-medal"></i>
+                                ${badgeText}
+                            </div>
+                        </div>
+                        <p>Score: ${correctAnswers}/${questions.length} (${score}%)</p>
+                        <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 1rem; overflow: hidden;">
+                            <div style="width: ${score}%; height: 100%; background: ${score >= 70 ? '#10b981' : score >= 50 ? '#f59e0b' : '#ef4444'}; transition: width 1s ease;"></div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            const averageScore = Math.round(totalScore / selectedSkills.length);
+            
+            container.innerHTML = `
+                <div class="score-display">${averageScore}%</div>
+                <p>Overall Performance</p>
+                ${resultsHTML}
+                <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 0.5rem; margin-top: 1rem;">
+                    <p><strong>🎉 Congratulations!</strong> Your verified skills have been added to your PRAGATI-AI profile. These badges will increase your match quality and improve employer confidence in your abilities.</p>
+                </div>
+            `;
+        }
+        
+        function retakeTest() {
+            selectedSkills = [];
+            document.querySelectorAll('.skill-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            updateStartButton();
+            
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('skill-selection').style.display = 'block';
+        }
+        
+        function saveResults() {
+            // Save to localStorage for demo
+            const verificationResults = {
+                timestamp: new Date().toISOString(),
+                skills: selectedSkills,
+                results: testResults,
+                averageScore: Math.round(Object.values(testResults).reduce((sum, skill) => {
+                    return sum + (Object.keys(skill).length / skillQuestions[selectedSkills[0]].length * 100);
+                }, 0) / selectedSkills.length)
+            };
+            
+            localStorage.setItem('pragati-ai-skill-verification', JSON.stringify(verificationResults));
+            
+            showNotification('🎉 Verification results saved to your profile!', 'success');
+            
+            setTimeout(() => {
+                window.location.href = 'student-portal.html';
+            }, 2000);
+        }
+        
+        function goBack() {
+            window.history.back();
+        }
+        
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <div style="padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="color: white; font-weight: 500;">${message}</span>
+                    <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;">&times;</button>
+                </div>
+            `;
+            
+            const styles = `
+                .notification {
+                    position: fixed;
+                    top: 100px;
+                    right: 20px;
+                    z-index: 10000;
+                    min-width: 300px;
+                    max-width: 500px;
+                    border-radius: 0.75rem;
+                    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+                    animation: slideInRight 0.3s ease-out;
+                }
+                .notification-info { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+                .notification-success { background: linear-gradient(135deg, #10b981 0%, #34d399 100%); }
+                .notification-error { background: linear-gradient(135deg, #ef4444 0%, #f87171 100%); }
+                .notification-warning { background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); }
+                @keyframes slideInRight {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+            `;
+            
+            if (!document.getElementById('notification-styles')) {
+                const styleSheet = document.createElement('style');
+                styleSheet.id = 'notification-styles';
+                styleSheet.textContent = styles;
+                document.head.appendChild(styleSheet);
+            }
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.style.animation = 'slideOutRight 0.3s ease-out';
+                    setTimeout(() => notification.remove(), 300);
+                }
+            }, 5000);
+        }
+        
+        console.log('🎯 PRAGATI-AI Skill Verification System Initialized');
+    </script>
+</body>
+</html>

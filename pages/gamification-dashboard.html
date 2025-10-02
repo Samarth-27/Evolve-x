@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achievement Dashboard - PRAGATI-AI</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="gamification-dashboard.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="gamification-dashboard">
+        <div class="container">
+            <!-- Header -->
+            <div class="header">
+                <div class="logo">
+                    <i class="fas fa-trophy"></i>
+                    <h1>Achievement Dashboard</h1>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-outline" onclick="goBack()">
+                        <i class="fas fa-arrow-left"></i> Back to Portal
+                    </button>
+                </div>
+            </div>
+
+            <!-- Player Stats -->
+            <div class="player-stats">
+                <div class="player-card">
+                    <div class="player-avatar">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=student" alt="Avatar">
+                        <div class="level-badge">
+                            <span>Lv. 12</span>
+                        </div>
+                    </div>
+                    <div class="player-info">
+                        <h3>Sachin Kumar</h3>
+                        <p class="player-title">Aspiring Developer</p>
+                        <div class="xp-progress">
+                            <div class="xp-bar">
+                                <div class="xp-fill" style="width: 68%"></div>
+                            </div>
+                            <span class="xp-text">6,800 / 10,000 XP</span>
+                        </div>
+                    </div>
+                    <div class="player-rank">
+                        <div class="rank-number">#15</div>
+                        <div class="rank-label">Global Rank</div>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>23</h4>
+                            <p>Day Streak</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>18</h4>
+                            <p>Badges Earned</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>7</h4>
+                            <p>Skills Mastered</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>156</h4>
+                            <p>Peers Helped</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Achievements Section -->
+                <div class="achievements-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-trophy"></i> Recent Achievements</h2>
+                        <button class="btn btn-secondary" onclick="viewAllAchievements()">
+                            View All
+                        </button>
+                    </div>
+
+                    <div class="achievements-grid">
+                        <div class="achievement-card new">
+                            <div class="achievement-icon">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <div class="achievement-info">
+                                <h4>Profile Perfectionist</h4>
+                                <p>Complete your profile 100%</p>
+                                <div class="achievement-meta">
+                                    <span class="xp-reward">+500 XP</span>
+                                    <span class="timestamp">2 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="achievement-glow"></div>
+                        </div>
+
+                        <div class="achievement-card new">
+                            <div class="achievement-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="achievement-info">
+                                <h4>AI Interview Master</h4>
+                                <p>Score 90+ in AI interview</p>
+                                <div class="achievement-meta">
+                                    <span class="xp-reward">+750 XP</span>
+                                    <span class="timestamp">Yesterday</span>
+                                </div>
+                            </div>
+                            <div class="achievement-glow"></div>
+                        </div>
+
+                        <div class="achievement-card">
+                            <div class="achievement-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="achievement-info">
+                                <h4>Network Builder</h4>
+                                <p>Connect with 50 professionals</p>
+                                <div class="achievement-meta">
+                                    <span class="xp-reward">+300 XP</span>
+                                    <span class="timestamp">3 days ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Badge Collection -->
+                <div class="badges-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-medal"></i> Badge Collection</h2>
+                        <div class="badge-filter">
+                            <button class="filter-btn active" data-filter="all">All</button>
+                            <button class="filter-btn" data-filter="skills">Skills</button>
+                            <button class="filter-btn" data-filter="social">Social</button>
+                            <button class="filter-btn" data-filter="learning">Learning</button>
+                        </div>
+                    </div>
+
+                    <div class="badges-grid">
+                        <div class="badge-card earned skills" data-category="skills">
+                            <div class="badge-icon">
+                                <i class="fab fa-js-square"></i>
+                            </div>
+                            <h4>JavaScript Ninja</h4>
+                            <p>Master JavaScript fundamentals</p>
+                            <div class="badge-level">Gold</div>
+                        </div>
+
+                        <div class="badge-card earned skills" data-category="skills">
+                            <div class="badge-icon">
+                                <i class="fab fa-react"></i>
+                            </div>
+                            <h4>React Developer</h4>
+                            <p>Build 3 React applications</p>
+                            <div class="badge-level">Silver</div>
+                        </div>
+
+                        <div class="badge-card earned social" data-category="social">
+                            <div class="badge-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h4>Community Helper</h4>
+                            <p>Help 10 fellow students</p>
+                            <div class="badge-level">Bronze</div>
+                        </div>
+
+                        <div class="badge-card locked learning" data-category="learning">
+                            <div class="badge-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <h4>Database Expert</h4>
+                            <p>Complete database course</p>
+                            <div class="badge-progress">60%</div>
+                        </div>
+
+                        <div class="badge-card locked skills" data-category="skills">
+                            <div class="badge-icon">
+                                <i class="fab fa-aws"></i>
+                            </div>
+                            <h4>Cloud Architect</h4>
+                            <p>Get AWS certification</p>
+                            <div class="badge-progress">20%</div>
+                        </div>
+
+                        <div class="badge-card locked learning" data-category="learning">
+                            <div class="badge-icon">
+                                <i class="fas fa-fire-flame-curved"></i>
+                            </div>
+                            <h4>Learning Streak</h4>
+                            <p>Learn for 30 days straight</p>
+                            <div class="badge-progress">76%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leaderboard -->
+                <div class="leaderboard-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-crown"></i> Leaderboard</h2>
+                        <div class="leaderboard-filter">
+                            <select class="form-control">
+                                <option value="global">Global</option>
+                                <option value="college">My College</option>
+                                <option value="friends">Friends</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="leaderboard">
+                        <div class="leaderboard-item rank-1">
+                            <div class="rank-badge">
+                                <i class="fas fa-crown"></i>
+                                <span>1</span>
+                            </div>
+                            <div class="player-info">
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=rank1" alt="Avatar">
+                                <div>
+                                    <h4>Priya Sharma</h4>
+                                    <p>IIT Delhi</p>
+                                </div>
+                            </div>
+                            <div class="player-stats">
+                                <span class="xp">15,420 XP</span>
+                                <span class="level">Lv. 18</span>
+                            </div>
+                        </div>
+
+                        <div class="leaderboard-item rank-2">
+                            <div class="rank-badge">
+                                <span>2</span>
+                            </div>
+                            <div class="player-info">
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=rank2" alt="Avatar">
+                                <div>
+                                    <h4>Arjun Kumar</h4>
+                                    <p>BITS Pilani</p>
+                                </div>
+                            </div>
+                            <div class="player-stats">
+                                <span class="xp">14,850 XP</span>
+                                <span class="level">Lv. 17</span>
+                            </div>
+                        </div>
+
+                        <div class="leaderboard-item rank-3">
+                            <div class="rank-badge">
+                                <span>3</span>
+                            </div>
+                            <div class="player-info">
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=rank3" alt="Avatar">
+                                <div>
+                                    <h4>Anjali Gupta</h4>
+                                    <p>NIT Trichy</p>
+                                </div>
+                            </div>
+                            <div class="player-stats">
+                                <span class="xp">13,920 XP</span>
+                                <span class="level">Lv. 16</span>
+                            </div>
+                        </div>
+
+                        <div class="leaderboard-item current-user">
+                            <div class="rank-badge">
+                                <span>15</span>
+                            </div>
+                            <div class="player-info">
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=student" alt="Avatar">
+                                <div>
+                                    <h4>Sachin Kumar (You)</h4>
+                                    <p>Your College</p>
+                                </div>
+                            </div>
+                            <div class="player-stats">
+                                <span class="xp">6,800 XP</span>
+                                <span class="level">Lv. 12</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Challenges -->
+                <div class="challenges-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-target"></i> Active Challenges</h2>
+                    </div>
+
+                    <div class="challenges-grid">
+                        <div class="challenge-card active">
+                            <div class="challenge-header">
+                                <div class="challenge-icon">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <div class="challenge-meta">
+                                    <span class="challenge-type">Daily</span>
+                                    <span class="challenge-difficulty">Easy</span>
+                                </div>
+                            </div>
+                            <h4>Code Every Day</h4>
+                            <p>Complete at least one coding exercise</p>
+                            <div class="challenge-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 85%"></div>
+                                </div>
+                                <span>17/20 days</span>
+                            </div>
+                            <div class="challenge-reward">
+                                <span>🏆 500 XP + Coding Streak Badge</span>
+                            </div>
+                        </div>
+
+                        <div class="challenge-card active">
+                            <div class="challenge-header">
+                                <div class="challenge-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="challenge-meta">
+                                    <span class="challenge-type">Weekly</span>
+                                    <span class="challenge-difficulty">Medium</span>
+                                </div>
+                            </div>
+                            <h4>Networking Pro</h4>
+                            <p>Connect with 5 industry professionals</p>
+                            <div class="challenge-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 40%"></div>
+                                </div>
+                                <span>2/5 connections</span>
+                            </div>
+                            <div class="challenge-reward">
+                                <span>🌟 750 XP + Network Builder Badge</span>
+                            </div>
+                        </div>
+
+                        <div class="challenge-card">
+                            <div class="challenge-header">
+                                <div class="challenge-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <div class="challenge-meta">
+                                    <span class="challenge-type">Monthly</span>
+                                    <span class="challenge-difficulty">Hard</span>
+                                </div>
+                            </div>
+                            <h4>Skill Master</h4>
+                            <p>Master a new technical skill this month</p>
+                            <div class="challenge-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 25%"></div>
+                                </div>
+                                <span>7/30 days</span>
+                            </div>
+                            <div class="challenge-reward">
+                                <span>💎 1000 XP + Skill Master Badge</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="gamification-dashboard.js"></script>
+</body>
+</html>

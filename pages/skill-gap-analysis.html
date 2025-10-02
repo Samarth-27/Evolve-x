@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Gap Analysis - PRAGATI-AI</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="skill-gap-analysis.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="skill-gap-analyzer">
+        <div class="container">
+            <!-- Header -->
+            <div class="header">
+                <div class="logo">
+                    <i class="fas fa-brain"></i>
+                    <h1>AI Skill Gap Analysis</h1>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-outline" onclick="goBack()">
+                        <i class="fas fa-arrow-left"></i> Back to Portal
+                    </button>
+                    <button class="btn btn-primary" onclick="exportReport()">
+                        <i class="fas fa-download"></i> Export Report
+                    </button>
+                </div>
+            </div>
+
+            <!-- Analysis Dashboard -->
+            <div class="analysis-dashboard">
+                <!-- Current Skills Overview -->
+                <div class="skills-overview">
+                    <div class="section-header">
+                        <h2><i class="fas fa-user-cog"></i> Your Current Skills</h2>
+                        <button class="btn btn-secondary" onclick="updateSkills()">
+                            <i class="fas fa-edit"></i> Update Skills
+                        </button>
+                    </div>
+                    
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h3>Programming Languages</h3>
+                            <div class="skill-items" id="programming-skills">
+                                <div class="skill-item advanced">
+                                    <span class="skill-name">JavaScript</span>
+                                    <div class="skill-level">
+                                        <div class="level-bar">
+                                            <div class="level-fill" style="width: 85%"></div>
+                                        </div>
+                                        <span class="level-text">Advanced (85%)</span>
+                                    </div>
+                                </div>
+                                <div class="skill-item intermediate">
+                                    <span class="skill-name">Python</span>
+                                    <div class="skill-level">
+                                        <div class="level-bar">
+                                            <div class="level-fill" style="width: 70%"></div>
+                                        </div>
+                                        <span class="level-text">Intermediate (70%)</span>
+                                    </div>
+                                </div>
+                                <div class="skill-item beginner">
+                                    <span class="skill-name">Java</span>
+                                    <div class="skill-level">
+                                        <div class="level-bar">
+                                            <div class="level-fill" style="width: 45%"></div>
+                                        </div>
+                                        <span class="level-text">Beginner (45%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-category">
+                            <h3>Frameworks & Tools</h3>
+                            <div class="skill-items" id="framework-skills">
+                                <div class="skill-item intermediate">
+                                    <span class="skill-name">React.js</span>
+                                    <div class="skill-level">
+                                        <div class="level-bar">
+                                            <div class="level-fill" style="width: 65%"></div>
+                                        </div>
+                                        <span class="level-text">Intermediate (65%)</span>
+                                    </div>
+                                </div>
+                                <div class="skill-item beginner">
+                                    <span class="skill-name">Node.js</span>
+                                    <div class="skill-level">
+                                        <div class="level-bar">
+                                            <div class="level-fill" style="width: 40%"></div>
+                                        </div>
+                                        <span class="level-text">Beginner (40%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-category">
+                            <h3>Soft Skills</h3>
+                            <div class="skill-items" id="soft-skills">
+                                <div class="skill-item advanced">
+                                    <span class="skill-name">Communication</span>
+                                    <div class="skill-level">
+                                        <div class="level-bar">
+                                            <div class="level-fill" style="width: 80%"></div>
+                                        </div>
+                                        <span class="level-text">Advanced (80%)</span>
+                                    </div>
+                                </div>
+                                <div class="skill-item intermediate">
+                                    <span class="skill-name">Leadership</span>
+                                    <div class="skill-level">
+                                        <div class="level-bar">
+                                            <div class="level-fill" style="width: 60%"></div>
+                                        </div>
+                                        <span class="level-text">Intermediate (60%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gap Analysis -->
+                <div class="gap-analysis">
+                    <div class="section-header">
+                        <h2><i class="fas fa-chart-gap"></i> Skill Gap Analysis</h2>
+                        <div class="analysis-filters">
+                            <select id="industry-filter" class="form-control">
+                                <option value="all">All Industries</option>
+                                <option value="software">Software Development</option>
+                                <option value="data-science">Data Science</option>
+                                <option value="ai-ml">AI/ML</option>
+                            </select>
+                            <select id="role-filter" class="form-control">
+                                <option value="all">All Roles</option>
+                                <option value="frontend">Frontend Developer</option>
+                                <option value="backend">Backend Developer</option>
+                                <option value="fullstack">Full Stack Developer</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="gap-results">
+                        <div class="gap-summary">
+                            <div class="summary-card critical">
+                                <div class="summary-icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="summary-info">
+                                    <h3>5</h3>
+                                    <p>Critical Gaps</p>
+                                </div>
+                            </div>
+                            <div class="summary-card moderate">
+                                <div class="summary-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="summary-info">
+                                    <h3>8</h3>
+                                    <p>Improvement Areas</p>
+                                </div>
+                            </div>
+                            <div class="summary-card good">
+                                <div class="summary-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="summary-info">
+                                    <h3>12</h3>
+                                    <p>Strong Skills</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="gap-details">
+                            <div class="gap-item critical">
+                                <div class="gap-header">
+                                    <div class="gap-title">
+                                        <i class="fas fa-database"></i>
+                                        <span>Database Management (MongoDB, PostgreSQL)</span>
+                                    </div>
+                                    <div class="gap-priority">Critical</div>
+                                </div>
+                                <div class="gap-info">
+                                    <p>Required for 85% of target roles. Current level: None</p>
+                                    <div class="gap-impact">
+                                        <span class="impact-label">Impact:</span>
+                                        <span class="impact-value">High - Blocking 12 potential opportunities</span>
+                                    </div>
+                                </div>
+                                <div class="gap-actions">
+                                    <button class="btn btn-primary btn-sm" onclick="createLearningPath('database')">
+                                        <i class="fas fa-route"></i> Create Learning Path
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" onclick="findCourses('database')">
+                                        <i class="fas fa-graduation-cap"></i> Find Courses
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="gap-item critical">
+                                <div class="gap-header">
+                                    <div class="gap-title">
+                                        <i class="fas fa-cloud"></i>
+                                        <span>Cloud Platforms (AWS, Azure)</span>
+                                    </div>
+                                    <div class="gap-priority">Critical</div>
+                                </div>
+                                <div class="gap-info">
+                                    <p>Required for 78% of target roles. Current level: None</p>
+                                    <div class="gap-impact">
+                                        <span class="impact-label">Impact:</span>
+                                        <span class="impact-value">High - Essential for modern development</span>
+                                    </div>
+                                </div>
+                                <div class="gap-actions">
+                                    <button class="btn btn-primary btn-sm" onclick="createLearningPath('cloud')">
+                                        <i class="fas fa-route"></i> Create Learning Path
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" onclick="findCourses('cloud')">
+                                        <i class="fas fa-graduation-cap"></i> Find Courses
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="gap-item moderate">
+                                <div class="gap-header">
+                                    <div class="gap-title">
+                                        <i class="fas fa-vial"></i>
+                                        <span>Testing Frameworks (Jest, Cypress)</span>
+                                    </div>
+                                    <div class="gap-priority">Moderate</div>
+                                </div>
+                                <div class="gap-info">
+                                    <p>Required for 65% of target roles. Current level: Basic</p>
+                                    <div class="gap-impact">
+                                        <span class="impact-label">Impact:</span>
+                                        <span class="impact-value">Medium - Important for quality development</span>
+                                    </div>
+                                </div>
+                                <div class="gap-actions">
+                                    <button class="btn btn-primary btn-sm" onclick="createLearningPath('testing')">
+                                        <i class="fas fa-route"></i> Create Learning Path
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" onclick="findCourses('testing')">
+                                        <i class="fas fa-graduation-cap"></i> Find Courses
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learning Recommendations -->
+                <div class="learning-recommendations">
+                    <div class="section-header">
+                        <h2><i class="fas fa-lightbulb"></i> Personalized Learning Path</h2>
+                    </div>
+
+                    <div class="learning-timeline">
+                        <div class="timeline-item current">
+                            <div class="timeline-marker">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>Week 1-2: Database Fundamentals</h4>
+                                <p>Start with SQL basics and database design principles</p>
+                                <div class="timeline-resources">
+                                    <a href="#" class="resource-link">
+                                        <i class="fas fa-video"></i> SQL Tutorial (FreeCodeCamp)
+                                    </a>
+                                    <a href="#" class="resource-link">
+                                        <i class="fas fa-book"></i> Database Design Course (Coursera)
+                                    </a>
+                                </div>
+                                <div class="timeline-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 25%"></div>
+                                    </div>
+                                    <span>25% Complete</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-marker">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>Week 3-4: MongoDB & NoSQL</h4>
+                                <p>Learn document databases and MongoDB operations</p>
+                                <div class="timeline-resources">
+                                    <a href="#" class="resource-link">
+                                        <i class="fas fa-code"></i> MongoDB Tutorial (MongoDB University)
+                                    </a>
+                                    <a href="#" class="resource-link">
+                                        <i class="fas fa-project-diagram"></i> Hands-on Project
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-marker">
+                                <i class="fas fa-cloud"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>Week 5-6: Cloud Basics (AWS)</h4>
+                                <p>Introduction to cloud computing and AWS services</p>
+                                <div class="timeline-resources">
+                                    <a href="#" class="resource-link">
+                                        <i class="fas fa-graduation-cap"></i> AWS Cloud Practitioner (Free)
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-marker">
+                                <i class="fas fa-vial"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>Week 7-8: Testing & Quality Assurance</h4>
+                                <p>Learn testing frameworks and best practices</p>
+                                <div class="timeline-resources">
+                                    <a href="#" class="resource-link">
+                                        <i class="fas fa-code"></i> Jest & Testing Library
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Market Intelligence -->
+                <div class="market-intelligence">
+                    <div class="section-header">
+                        <h2><i class="fas fa-chart-line"></i> Market Intelligence</h2>
+                    </div>
+
+                    <div class="market-insights">
+                        <div class="insight-card">
+                            <div class="insight-header">
+                                <h4>Trending Skills</h4>
+                                <i class="fas fa-trending-up"></i>
+                            </div>
+                            <div class="insight-content">
+                                <div class="trend-item">
+                                    <span class="trend-skill">AI/Machine Learning</span>
+                                    <span class="trend-growth">+45%</span>
+                                </div>
+                                <div class="trend-item">
+                                    <span class="trend-skill">Cloud Computing</span>
+                                    <span class="trend-growth">+38%</span>
+                                </div>
+                                <div class="trend-item">
+                                    <span class="trend-skill">DevOps</span>
+                                    <span class="trend-growth">+32%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="insight-card">
+                            <div class="insight-header">
+                                <h4>Salary Impact</h4>
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <div class="insight-content">
+                                <div class="salary-item">
+                                    <span class="salary-skill">Database Skills</span>
+                                    <span class="salary-increase">+₹2.5L/year</span>
+                                </div>
+                                <div class="salary-item">
+                                    <span class="salary-skill">Cloud Platforms</span>
+                                    <span class="salary-increase">+₹3.2L/year</span>
+                                </div>
+                                <div class="salary-item">
+                                    <span class="salary-skill">Testing</span>
+                                    <span class="salary-increase">+₹1.8L/year</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="skill-gap-analysis.js"></script>
+</body>
+</html>

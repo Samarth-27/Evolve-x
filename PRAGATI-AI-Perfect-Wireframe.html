@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRAGATI-AI - Perfect Architecture Wireframe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: white;
+            padding: 20px;
+        }
+        
+        .export-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border: 1px solid #ddd;
+            padding: 0;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            color: #6c757d;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        
+        .header .subtitle {
+            color: #e74c3c;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        /* Main wireframe canvas */
+        .wireframe-canvas {
+            width: 1200px;
+            height: 800px;
+            background: #ffffff;
+            position: relative;
+            border: none;
+            margin: 0;
+        }
+        
+        /* Component base styles */
+        .component {
+            position: absolute;
+            border-radius: 6px;
+            border: 2px solid;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .component-title {
+            font-size: 13px;
+            font-weight: bold;
+            line-height: 1.2;
+            margin-bottom: 3px;
+        }
+        
+        .component-subtitle {
+            font-size: 10px;
+            opacity: 0.8;
+            line-height: 1.1;
+        }
+        
+        /* User Layer */
+        .user {
+            background: #e8d5ff;
+            border-color: #9b59b6;
+            color: #8e44ad;
+            top: 30px;
+            left: 550px;
+            width: 100px;
+            height: 50px;
+        }
+        
+        /* Hardware Sensors */
+        .hardware-sensors {
+            background: #fff3cd;
+            border-color: #f1c40f;
+            color: #856404;
+            top: 120px;
+            left: 50px;
+            width: 120px;
+            height: 60px;
+        }
+        
+        /* Frontend Layer Container */
+        .frontend-container {
+            background: rgba(52, 152, 219, 0.05);
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            top: 120px;
+            left: 250px;
+            width: 550px;
+            height: 100px;
+        }
+        
+        .student-portal {
+            background: #d6eaf8;
+            border-color: #3498db;
+            color: #2980b9;
+            top: 135px;
+            left: 270px;
+            width: 140px;
+            height: 35px;
+        }
+        
+        .web-app {
+            background: #d6eaf8;
+            border-color: #3498db;
+            color: #2980b9;
+            top: 135px;
+            left: 430px;
+            width: 140px;
+            height: 35px;
+        }
+        
+        .admin-dashboard {
+            background: #d6eaf8;
+            border-color: #3498db;
+            color: #2980b9;
+            top: 175px;
+            left: 350px;
+            width: 120px;
+            height: 35px;
+        }
+        
+        /* Admin Dashboard Separate */
+        .admin-separate {
+            background: #ffeaa7;
+            border-color: #f39c12;
+            color: #d68910;
+            top: 140px;
+            left: 950px;
+            width: 120px;
+            height: 50px;
+        }
+        
+        /* AI Pipeline Container */
+        .ai-pipeline-container {
+            background: rgba(46, 204, 113, 0.05);
+            border: 2px solid #27ae60;
+            border-radius: 8px;
+            top: 280px;
+            left: 50px;
+            width: 180px;
+            height: 380px;
+        }
+        
+        .ai-component {
+            background: #d5f4e6;
+            border-color: #27ae60;
+            color: #1e8449;
+            width: 150px;
+            height: 45px;
+            left: 65px;
+        }
+        
+        .speech-processing { top: 300px; }
+        .nlp-analysis { top: 360px; }
+        .skill-assessment { top: 420px; }
+        .feedback-generation { top: 480px; }
+        .performance-prediction { top: 540px; }
+        
+        /* Backend Services Container */
+        .backend-container {
+            background: rgba(241, 196, 15, 0.05);
+            border: 2px solid #f39c12;
+            border-radius: 8px;
+            top: 280px;
+            left: 350px;
+            width: 450px;
+            height: 180px;
+        }
+        
+        .api-gateway {
+            background: #fdeaa7;
+            border-color: #f39c12;
+            color: #b7950b;
+            top: 300px;
+            left: 370px;
+            width: 120px;
+            height: 35px;
+        }
+        
+        .auth-service {
+            background: #fadbd8;
+            border-color: #e74c3c;
+            color: #c0392b;
+            top: 300px;
+            left: 510px;
+            width: 90px;
+            height: 35px;
+        }
+        
+        .analytics-engine {
+            background: #d5f4e6;
+            border-color: #27ae60;
+            color: #1e8449;
+            top: 300px;
+            left: 620px;
+            width: 110px;
+            height: 35px;
+        }
+        
+        .gamification {
+            background: #e8daef;
+            border-color: #8e44ad;
+            color: #7d3c98;
+            top: 350px;
+            left: 370px;
+            width: 110px;
+            height: 35px;
+        }
+        
+        .notifications {
+            background: #fef9e7;
+            border-color: #f4d03f;
+            color: #b7950b;
+            top: 350px;
+            left: 500px;
+            width: 110px;
+            height: 35px;
+        }
+        
+        .microservices {
+            background: #eaf2f8;
+            border-color: #5dade2;
+            color: #2980b9;
+            top: 400px;
+            left: 450px;
+            width: 120px;
+            height: 35px;
+        }
+        
+        /* Data Storage Container */
+        .storage-container {
+            background: rgba(142, 68, 173, 0.05);
+            border: 2px solid #8e44ad;
+            border-radius: 8px;
+            top: 520px;
+            left: 350px;
+            width: 450px;
+            height: 120px;
+        }
+        
+        .mongodb {
+            background: #2c3e50;
+            border-color: #34495e;
+            color: white;
+            top: 540px;
+            left: 370px;
+            width: 100px;
+            height: 40px;
+            border-radius: 20px;
+        }
+        
+        .redis-cache {
+            background: #dc7633;
+            border-color: #e67e22;
+            color: white;
+            top: 540px;
+            left: 490px;
+            width: 90px;
+            height: 40px;
+        }
+        
+        .file-storage {
+            background: #58d68d;
+            border-color: #28b463;
+            color: white;
+            top: 540px;
+            left: 600px;
+            width: 90px;
+            height: 40px;
+            border-radius: 20px;
+        }
+        
+        .blockchain {
+            background: #af7ac5;
+            border-color: #8e44ad;
+            color: white;
+            top: 590px;
+            left: 450px;
+            width: 120px;
+            height: 35px;
+        }
+        
+        /* External Services */
+        .external-apis {
+            background: #d5d8dc;
+            border-color: #85929e;
+            color: #566573;
+            top: 720px;
+            left: 500px;
+            width: 200px;
+            height: 50px;
+        }
+        
+        /* Connection lines */
+        .connection {
+            position: absolute;
+            background: #7f8c8d;
+            z-index: 1;
+        }
+        
+        .connection.horizontal { height: 2px; }
+        .connection.vertical { width: 2px; }
+        
+        /* Arrows */
+        .arrow {
+            position: absolute;
+            width: 0;
+            height: 0;
+            z-index: 2;
+        }
+        
+        .arrow-right {
+            border-left: 6px solid #7f8c8d;
+            border-top: 4px solid transparent;
+            border-bottom: 4px solid transparent;
+        }
+        
+        .arrow-down {
+            border-top: 6px solid #7f8c8d;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+        }
+        
+        /* Connection labels */
+        .label {
+            position: absolute;
+            font-size: 9px;
+            color: #566573;
+            background: white;
+            padding: 2px 4px;
+            border-radius: 2px;
+            z-index: 3;
+            font-weight: 500;
+        }
+        
+        /* Layer titles */
+        .layer-title {
+            position: absolute;
+            font-size: 14px;
+            font-weight: bold;
+            color: #2c3e50;
+            background: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            border: 2px solid #3498db;
+            z-index: 10;
+        }
+        
+        .export-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            z-index: 1000;
+        }
+        
+        .export-button:hover {
+            background: #2980b9;
+        }
+    </style>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+<body>
+    <button class="export-button" onclick="exportToImage()">📸 Export as Image</button>
+    
+    <div class="export-container" id="exportContainer">
+        <div class="header">
+            <h1>PRAGATI-AI</h1>
+            <p>System Architecture Wireframe</p>
+            <p class="subtitle">Smart India Hackathon 2025</p>
+        </div>
+        
+        <div class="wireframe-canvas">
+            <!-- Layer Titles -->
+            <div class="layer-title" style="top: 95px; left: 450px;">Frontend Layer</div>
+            <div class="layer-title" style="top: 255px; left: 120px;">AI Pipeline</div>
+            <div class="layer-title" style="top: 255px; left: 520px;">Backend Services</div>
+            <div class="layer-title" style="top: 495px; left: 520px;">Data Storage</div>
+            
+            <!-- User -->
+            <div class="component user">
+                <div class="component-title">👤 User</div>
+                <div class="component-subtitle">Students & Admin</div>
+            </div>
+            
+            <!-- Hardware Sensors -->
+            <div class="component hardware-sensors">
+                <div class="component-title">🔧 Hardware Sensors</div>
+                <div class="component-subtitle">Microphone<br>Camera</div>
+            </div>
+            
+            <!-- Frontend Container -->
+            <div class="component frontend-container"></div>
+            
+            <div class="component student-portal">
+                <div class="component-title">Student Portal</div>
+                <div class="component-subtitle">HTML5, CSS3, JS</div>
+            </div>
+            
+            <div class="component web-app">
+                <div class="component-title">Web Application</div>
+                <div class="component-subtitle">PWA, Responsive</div>
+            </div>
+            
+            <div class="component admin-dashboard">
+                <div class="component-title">Portal Dashboard</div>
+                <div class="component-subtitle">Management UI</div>
+            </div>
+            
+            <!-- Admin Dashboard Separate -->
+            <div class="component admin-separate">
+                <div class="component-title">🛠️ Admin Dashboard</div>
+                <div class="component-subtitle">System Monitor</div>
+            </div>
+            
+            <!-- AI Pipeline Container -->
+            <div class="component ai-pipeline-container"></div>
+            
+            <div class="component ai-component speech-processing">
+                <div class="component-title">🎤 Speech Processing</div>
+                <div class="component-subtitle">Web Speech API</div>
+            </div>
+            
+            <div class="component ai-component nlp-analysis">
+                <div class="component-title">🧠 NLP Analysis</div>
+                <div class="component-subtitle">Text Processing</div>
+            </div>
+            
+            <div class="component ai-component skill-assessment">
+                <div class="component-title">📊 Skill Assessment</div>
+                <div class="component-subtitle">Gap Analysis</div>
+            </div>
+            
+            <div class="component ai-component feedback-generation">
+                <div class="component-title">💬 Feedback Engine</div>
+                <div class="component-subtitle">Real-time Response</div>
+            </div>
+            
+            <div class="component ai-component performance-prediction">
+                <div class="component-title">🎯 Performance AI</div>
+                <div class="component-subtitle">Prediction Models</div>
+            </div>
+            
+            <!-- Backend Container -->
+            <div class="component backend-container"></div>
+            
+            <div class="component api-gateway">
+                <div class="component-title">🌐 API Gateway</div>
+                <div class="component-subtitle">RESTful Services</div>
+            </div>
+            
+            <div class="component auth-service">
+                <div class="component-title">🔐 Auth</div>
+                <div class="component-subtitle">JWT Security</div>
+            </div>
+            
+            <div class="component analytics-engine">
+                <div class="component-title">📈 Analytics</div>
+                <div class="component-subtitle">Performance Track</div>
+            </div>
+            
+            <div class="component gamification">
+                <div class="component-title">🎮 Gamification</div>
+                <div class="component-subtitle">Badges & Rewards</div>
+            </div>
+            
+            <div class="component notifications">
+                <div class="component-title">🔔 Notifications</div>
+                <div class="component-subtitle">Real-time Alerts</div>
+            </div>
+            
+            <div class="component microservices">
+                <div class="component-title">⚙️ Microservices</div>
+                <div class="component-subtitle">Scalable APIs</div>
+            </div>
+            
+            <!-- Storage Container -->
+            <div class="component storage-container"></div>
+            
+            <div class="component mongodb">
+                <div class="component-title">🍃 MongoDB</div>
+                <div class="component-subtitle">Primary DB</div>
+            </div>
+            
+            <div class="component redis-cache">
+                <div class="component-title">⚡ Redis</div>
+                <div class="component-subtitle">Fast Cache</div>
+            </div>
+            
+            <div class="component file-storage">
+                <div class="component-title">☁️ Cloud Store</div>
+                <div class="component-subtitle">Media Files</div>
+            </div>
+            
+            <div class="component blockchain">
+                <div class="component-title">🔗 Blockchain</div>
+                <div class="component-subtitle">Skills Verification</div>
+            </div>
+            
+            <!-- External APIs -->
+            <div class="component external-apis">
+                <div class="component-title">🏛️ External APIs</div>
+                <div class="component-subtitle">Government Integration & Third-party</div>
+            </div>
+            
+            <!-- Connection Lines and Arrows -->
+            
+            <!-- User to Frontend -->
+            <div class="connection vertical" style="top: 80px; left: 599px; height: 40px;"></div>
+            <div class="arrow arrow-down" style="top: 116px; left: 596px;"></div>
+            <div class="label" style="top: 95px; left: 610px;">Interacts</div>
+            
+            <!-- Hardware to AI -->
+            <div class="connection horizontal" style="top: 149px; left: 170px; width: 65px;"></div>
+            <div class="connection vertical" style="top: 149px; left: 235px; height: 131px;"></div>
+            <div class="connection horizontal" style="top: 280px; left: 235px; width: 45px;"></div>
+            <div class="arrow arrow-right" style="top: 277px; left: 274px;"></div>
+            <div class="label" style="top: 200px; left: 200px;">Real-time<br>Audio Data</div>
+            
+            <!-- Frontend to Backend -->
+            <div class="connection vertical" style="top: 220px; left: 449px; height: 60px;"></div>
+            <div class="arrow arrow-down" style="top: 276px; left: 446px;"></div>
+            <div class="label" style="top: 245px; left: 460px;">API<br>Requests</div>
+            
+            <!-- AI to Backend -->
+            <div class="connection horizontal" style="top: 372px; left: 230px; width: 120px;"></div>
+            <div class="arrow arrow-right" style="top: 369px; left: 344px;"></div>
+            <div class="label" style="top: 355px; left: 270px;">AI Processing</div>
+            
+            <!-- Backend to Storage -->
+            <div class="connection vertical" style="top: 460px; left: 509px; height: 60px;"></div>
+            <div class="arrow arrow-down" style="top: 516px; left: 506px;"></div>
+            <div class="label" style="top: 480px; left: 520px;">Data<br>Queries</div>
+            
+            <!-- Admin Dashboard Connection -->
+            <div class="connection horizontal" style="top: 165px; left: 800px; width: 150px;"></div>
+            <div class="connection vertical" style="top: 165px; left: 800px; height: 155px;"></div>
+            <div class="connection horizontal" style="top: 320px; left: 750px; width: 50px;"></div>
+            <div class="arrow arrow-right" style="top: 317px; left: 794px;"></div>
+            <div class="label" style="top: 240px; left: 810px;">Monitoring<br>& Control</div>
+            
+            <!-- Storage to External -->
+            <div class="connection vertical" style="top: 640px; left: 574px; height: 80px;"></div>
+            <div class="arrow arrow-down" style="top: 716px; left: 571px;"></div>
+            <div class="label" style="top: 675px; left: 585px;">External<br>Integration</div>
+            
+            <!-- Data Flow Indicators -->
+            <div style="position: absolute; top: 10px; left: 50px; font-size: 12px; color: #7f8c8d; font-weight: bold;">
+                📊 Data Flow: User Input → Frontend → AI Pipeline → Backend → Storage → External APIs
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function exportToImage() {
+            const container = document.getElementById('exportContainer');
+            const button = document.querySelector('.export-button');
+            
+            // Hide the export button temporarily
+            button.style.display = 'none';
+            
+            html2canvas(container, {
+                width: 1200,
+                height: 880,
+                scale: 2,
+                backgroundColor: '#ffffff',
+                useCORS: true,
+                allowTaint: false
+            }).then(function(canvas) {
+                // Create download link
+                const link = document.createElement('a');
+                link.download = 'PRAGATI-AI-Architecture-Wireframe-2025.png';
+                link.href = canvas.toDataURL('image/png');
+                
+                // Create a temporary container to show the image
+                const imageContainer = document.createElement('div');
+                imageContainer.style.position = 'fixed';
+                imageContainer.style.top = '0';
+                imageContainer.style.left = '0';
+                imageContainer.style.width = '100vw';
+                imageContainer.style.height = '100vh';
+                imageContainer.style.backgroundColor = 'rgba(0,0,0,0.9)';
+                imageContainer.style.zIndex = '9999';
+                imageContainer.style.display = 'flex';
+                imageContainer.style.justifyContent = 'center';
+                imageContainer.style.alignItems = 'center';
+                imageContainer.style.flexDirection = 'column';
+                
+                const img = document.createElement('img');
+                img.src = canvas.toDataURL('image/png');
+                img.style.maxWidth = '90%';
+                img.style.maxHeight = '80%';
+                img.style.border = '2px solid white';
+                img.style.borderRadius = '10px';
+                
+                const instructions = document.createElement('div');
+                instructions.innerHTML = `
+                    <div style="color: white; text-align: center; margin-top: 20px; font-family: Arial, sans-serif;">
+                        <h3>🎉 Image Generated Successfully!</h3>
+                        <p style="margin: 10px 0;">Right-click on the image above and select "Copy Image" or "Save Image As"</p>
+                        <button onclick="this.parentElement.parentElement.parentElement.remove(); document.querySelector('.export-button').style.display = 'block';" 
+                                style="background: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin: 10px;">
+                            ✖ Close
+                        </button>
+                        <button onclick="arguments[0].preventDefault(); 
+                                const link = document.createElement('a'); 
+                                link.download = 'PRAGATI-AI-Architecture-Wireframe-2025.png'; 
+                                link.href = '${canvas.toDataURL('image/png')}'; 
+                                link.click();" 
+                                style="background: #27ae60; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin: 10px;">
+                            💾 Download
+                        </button>
+                    </div>
+                `;
+                
+                imageContainer.appendChild(img);
+                imageContainer.appendChild(instructions);
+                document.body.appendChild(imageContainer);
+                
+                // Show the button again
+                button.style.display = 'block';
+            }).catch(function(error) {
+                console.error('Error generating image:', error);
+                alert('Error generating image. Please try again.');
+                button.style.display = 'block';
+            });
+        }
+        
+        // Add click-to-copy functionality for the image
+        document.addEventListener('DOMContentLoaded', function() {
+            // Auto-generate image after page load for easy access
+            setTimeout(() => {
+                console.log('Page loaded. Click the "📸 Export as Image" button to generate your wireframe image.');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

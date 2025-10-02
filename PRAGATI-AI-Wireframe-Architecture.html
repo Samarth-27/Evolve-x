@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRAGATI-AI - System Architecture Wireframe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .wireframe-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .header .subtitle {
+            color: #e74c3c;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .architecture-wireframe {
+            width: 100%;
+            height: 800px;
+            border: 2px solid #bdc3c7;
+            border-radius: 10px;
+            background: #ecf0f1;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Component Styles */
+        .component {
+            position: absolute;
+            border-radius: 8px;
+            border: 2px solid;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .component:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .component-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .component-subtitle {
+            font-size: 11px;
+            opacity: 0.8;
+        }
+        
+        /* User Layer */
+        .user {
+            background: #e8d5ff;
+            border-color: #9b59b6;
+            color: #8e44ad;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 60px;
+        }
+        
+        /* Frontend Layer */
+        .frontend-container {
+            background: rgba(46, 204, 113, 0.1);
+            border-color: #27ae60;
+            top: 120px;
+            left: 300px;
+            width: 600px;
+            height: 120px;
+            border-radius: 12px;
+        }
+        
+        .react-app {
+            background: #5dade2;
+            border-color: #3498db;
+            color: #2980b9;
+            top: 140px;
+            left: 320px;
+            width: 180px;
+            height: 40px;
+        }
+        
+        .react-server {
+            background: #5dade2;
+            border-color: #3498db;
+            color: #2980b9;
+            top: 190px;
+            left: 320px;
+            width: 180px;
+            height: 40px;
+        }
+        
+        /* AI Pipeline */
+        .ai-pipeline {
+            background: rgba(52, 152, 219, 0.1);
+            border-color: #3498db;
+            top: 280px;
+            left: 50px;
+            width: 200px;
+            height: 400px;
+            border-radius: 12px;
+        }
+        
+        .ai-component {
+            background: #3498db;
+            border-color: #2980b9;
+            color: white;
+            width: 160px;
+            height: 50px;
+            left: 70px;
+        }
+        
+        .speech-processing { top: 310px; }
+        .nlp-analysis { top: 380px; }
+        .skill-assessment { top: 450px; }
+        .feedback-generation { top: 520px; }
+        .performance-prediction { top: 590px; }
+        
+        /* Backend Services */
+        .backend-container {
+            background: rgba(241, 196, 15, 0.1);
+            border-color: #f39c12;
+            top: 280px;
+            left: 400px;
+            width: 500px;
+            height: 200px;
+            border-radius: 12px;
+        }
+        
+        .api-routes {
+            background: #2ecc71;
+            border-color: #27ae60;
+            color: white;
+            top: 300px;
+            left: 420px;
+            width: 140px;
+            height: 40px;
+        }
+        
+        .auth-service {
+            background: #e74c3c;
+            border-color: #c0392b;
+            color: white;
+            top: 350px;
+            left: 420px;
+            width: 100px;
+            height: 35px;
+        }
+        
+        .analytics-service {
+            background: #2ecc71;
+            border-color: #27ae60;
+            color: white;
+            top: 350px;
+            left: 540px;
+            width: 120px;
+            height: 35px;
+        }
+        
+        .gamification-engine {
+            background: #9b59b6;
+            border-color: #8e44ad;
+            color: white;
+            top: 400px;
+            left: 420px;
+            width: 140px;
+            height: 35px;
+        }
+        
+        .notification-service {
+            background: #f39c12;
+            border-color: #e67e22;
+            color: white;
+            top: 400px;
+            left: 580px;
+            width: 110px;
+            height: 35px;
+        }
+        
+        /* Admin Dashboard */
+        .admin-dashboard {
+            background: #ff9ff3;
+            border-color: #e91e63;
+            color: #ad1457;
+            top: 140px;
+            left: 1000px;
+            width: 120px;
+            height: 50px;
+        }
+        
+        /* Data Storage */
+        .storage-container {
+            background: rgba(142, 68, 173, 0.1);
+            border-color: #8e44ad;
+            top: 520px;
+            left: 950px;
+            width: 300px;
+            height: 200px;
+            border-radius: 12px;
+        }
+        
+        .mongodb {
+            background: #2c3e50;
+            border-color: #34495e;
+            color: white;
+            top: 540px;
+            left: 970px;
+            width: 120px;
+            height: 45px;
+            border-radius: 50px;
+        }
+        
+        .redis-cache {
+            background: #34495e;
+            border-color: #2c3e50;
+            color: white;
+            top: 600px;
+            left: 970px;
+            width: 120px;
+            height: 40px;
+        }
+        
+        .file-storage {
+            background: #f39c12;
+            border-color: #e67e22;
+            color: white;
+            top: 660px;
+            left: 970px;
+            width: 120px;
+            height: 40px;
+            border-radius: 50px;
+        }
+        
+        /* External Services */
+        .external-services {
+            background: #95a5a6;
+            border-color: #7f8c8d;
+            color: white;
+            top: 740px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 40px;
+        }
+        
+        /* Hardware Sensors */
+        .hardware-sensors {
+            background: #f4d03f;
+            border-color: #f1c40f;
+            color: #d68910;
+            top: 200px;
+            left: 80px;
+            width: 120px;
+            height: 50px;
+        }
+        
+        /* Connection Lines */
+        .connection {
+            position: absolute;
+            background: #7f8c8d;
+            z-index: 1;
+        }
+        
+        .connection.horizontal {
+            height: 2px;
+        }
+        
+        .connection.vertical {
+            width: 2px;
+        }
+        
+        /* Connection arrows */
+        .arrow {
+            position: absolute;
+            width: 0;
+            height: 0;
+            z-index: 2;
+        }
+        
+        .arrow-right {
+            border-left: 8px solid #7f8c8d;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+        }
+        
+        .arrow-down {
+            border-top: 8px solid #7f8c8d;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+        }
+        
+        /* Labels for connections */
+        .connection-label {
+            position: absolute;
+            font-size: 10px;
+            color: #7f8c8d;
+            background: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 500;
+            z-index: 3;
+        }
+        
+        /* Layer labels */
+        .layer-label {
+            position: absolute;
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            background: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 2px solid #3498db;
+            z-index: 10;
+        }
+        
+        .frontend-label { top: 90px; left: 520px; }
+        .ai-label { top: 250px; left: 120px; }
+        .backend-label { top: 250px; left: 620px; }
+        .storage-label { top: 490px; left: 1070px; }
+        
+        /* Responsive Design */
+        @media (max-width: 1400px) {
+            .architecture-wireframe { height: 600px; transform: scale(0.8); }
+        }
+        
+        @media (max-width: 1000px) {
+            .architecture-wireframe { height: 500px; transform: scale(0.6); }
+        }
+    </style>
+</head>
+<body>
+    <div class="wireframe-container">
+        <div class="header">
+            <h1>PRAGATI-AI</h1>
+            <p>System Architecture Wireframe</p>
+            <p class="subtitle">Smart India Hackathon 2024</p>
+        </div>
+        
+        <div class="architecture-wireframe">
+            <!-- Layer Labels -->
+            <div class="layer-label frontend-label">Frontend Layer</div>
+            <div class="layer-label ai-label">AI Pipeline</div>
+            <div class="layer-label backend-label">Backend Services</div>
+            <div class="layer-label storage-label">Data Storage</div>
+            
+            <!-- User -->
+            <div class="component user">
+                <div class="component-title">User</div>
+            </div>
+            
+            <!-- Hardware Sensors -->
+            <div class="component hardware-sensors">
+                <div class="component-title">Hardware Sensors</div>
+                <div class="component-subtitle">Microphone, Camera</div>
+            </div>
+            
+            <!-- Frontend Layer -->
+            <div class="component frontend-container"></div>
+            
+            <div class="component react-app">
+                <div class="component-title">Student Portal</div>
+                <div class="component-subtitle">HTML5, CSS3, JS ES6+</div>
+            </div>
+            
+            <div class="component react-server">
+                <div class="component-title">Web Application</div>
+                <div class="component-subtitle">PWA, Responsive UI</div>
+            </div>
+            
+            <!-- Admin Dashboard -->
+            <div class="component admin-dashboard">
+                <div class="component-title">Admin Dashboard</div>
+                <div class="component-subtitle">Management</div>
+            </div>
+            
+            <!-- AI Pipeline -->
+            <div class="component ai-pipeline"></div>
+            
+            <div class="component ai-component speech-processing">
+                <div class="component-title">Speech Processing</div>
+                <div class="component-subtitle">Web Speech API</div>
+            </div>
+            
+            <div class="component ai-component nlp-analysis">
+                <div class="component-title">NLP Analysis</div>
+                <div class="component-subtitle">Text Processing</div>
+            </div>
+            
+            <div class="component ai-component skill-assessment">
+                <div class="component-title">Skill Assessment</div>
+                <div class="component-subtitle">Gap Analysis</div>
+            </div>
+            
+            <div class="component ai-component feedback-generation">
+                <div class="component-title">Feedback Engine</div>
+                <div class="component-subtitle">Real-time Response</div>
+            </div>
+            
+            <div class="component ai-component performance-prediction">
+                <div class="component-title">Performance AI</div>
+                <div class="component-subtitle">Prediction Models</div>
+            </div>
+            
+            <!-- Backend Services -->
+            <div class="component backend-container"></div>
+            
+            <div class="component api-routes">
+                <div class="component-title">API Gateway</div>
+                <div class="component-subtitle">RESTful Services</div>
+            </div>
+            
+            <div class="component auth-service">
+                <div class="component-title">Auth</div>
+                <div class="component-subtitle">JWT Security</div>
+            </div>
+            
+            <div class="component analytics-service">
+                <div class="component-title">Analytics Engine</div>
+                <div class="component-subtitle">Performance Tracking</div>
+            </div>
+            
+            <div class="component gamification-engine">
+                <div class="component-title">Gamification</div>
+                <div class="component-subtitle">Badges & Rewards</div>
+            </div>
+            
+            <div class="component notification-service">
+                <div class="component-title">Notifications</div>
+                <div class="component-subtitle">Real-time Alerts</div>
+            </div>
+            
+            <!-- Data Storage -->
+            <div class="component storage-container"></div>
+            
+            <div class="component mongodb">
+                <div class="component-title">MongoDB</div>
+                <div class="component-subtitle">Primary Database</div>
+            </div>
+            
+            <div class="component redis-cache">
+                <div class="component-title">Redis Cache</div>
+                <div class="component-subtitle">Fast Storage</div>
+            </div>
+            
+            <div class="component file-storage">
+                <div class="component-title">File Storage</div>
+                <div class="component-subtitle">Media Assets</div>
+            </div>
+            
+            <!-- External Services -->
+            <div class="component external-services">
+                <div class="component-title">External APIs</div>
+                <div class="component-subtitle">Government Integration</div>
+            </div>
+            
+            <!-- Connection Lines -->
+            <!-- User to Frontend -->
+            <div class="connection vertical" style="top: 80px; left: 599px; height: 40px;"></div>
+            <div class="arrow arrow-down" style="top: 115px; left: 594px;"></div>
+            <div class="connection-label" style="top: 95px; left: 610px;">Interacts</div>
+            
+            <!-- Hardware to AI -->
+            <div class="connection horizontal" style="top: 224px; left: 200px; width: 80px;"></div>
+            <div class="arrow arrow-right" style="top: 219px; left: 272px;"></div>
+            <div class="connection-label" style="top: 210px; left: 220px;">Real-time Data</div>
+            
+            <!-- Frontend to Backend -->
+            <div class="connection vertical" style="top: 240px; left: 599px; height: 40px;"></div>
+            <div class="arrow arrow-down" style="top: 275px; left: 594px;"></div>
+            <div class="connection-label" style="top: 255px; left: 610px;">API Requests</div>
+            
+            <!-- AI to Backend -->
+            <div class="connection horizontal" style="top: 380px; left: 250px; width: 150px;"></div>
+            <div class="arrow arrow-right" style="top: 375px; left: 392px;"></div>
+            <div class="connection-label" style="top: 365px; left: 300px;">AI Processing</div>
+            
+            <!-- Backend to Storage -->
+            <div class="connection horizontal" style="top: 380px; left: 700px; width: 250px;"></div>
+            <div class="arrow arrow-right" style="top: 375px; left: 942px;"></div>
+            <div class="connection-label" style="top: 365px; left: 800px;">Data Queries</div>
+            
+            <!-- Admin Dashboard to Backend -->
+            <div class="connection horizontal" style="top: 165px; left: 900px; width: 100px;"></div>
+            <div class="connection vertical" style="top: 165px; left: 900px; height: 115px;"></div>
+            <div class="arrow arrow-down" style="top: 275px; left: 895px;"></div>
+            <div class="connection-label" style="top: 220px; left: 910px;">Monitoring</div>
+            
+            <!-- Storage to External -->
+            <div class="connection vertical" style="top: 720px; left: 1099px; height: 20px;"></div>
+            <div class="connection horizontal" style="top: 740px; left: 625px; width: 474px;"></div>
+            <div class="arrow arrow-right" style="top: 735px; left: 617px;"></div>
+            <div class="connection-label" style="top: 725px; left: 800px;">Data Feed</div>
+        </div>
+        
+        <!-- Legend -->
+        <div style="margin-top: 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #3498db;">
+                <h4 style="color: #2c3e50; margin-bottom: 8px;">🎨 Frontend Layer</h4>
+                <p style="color: #7f8c8d; font-size: 13px;">User interfaces built with modern web technologies - HTML5, CSS3, JavaScript ES6+</p>
+            </div>
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #e74c3c;">
+                <h4 style="color: #2c3e50; margin-bottom: 8px;">🤖 AI Pipeline</h4>
+                <p style="color: #7f8c8d; font-size: 13px;">Machine learning components for speech processing, skill analysis, and intelligent feedback</p>
+            </div>
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #27ae60;">
+                <h4 style="color: #2c3e50; margin-bottom: 8px;">⚙️ Backend Services</h4>
+                <p style="color: #7f8c8d; font-size: 13px;">RESTful APIs, authentication, analytics, gamification, and notification services</p>
+            </div>
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #9b59b6;">
+                <h4 style="color: #2c3e50; margin-bottom: 8px;">💾 Data Storage</h4>
+                <p style="color: #7f8c8d; font-size: 13px;">MongoDB for primary data, Redis for caching, and cloud storage for media files</p>
+            </div>
+        </div>
+        
+        <!-- Data Flow Description -->
+        <div style="margin-top: 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; border-radius: 12px;">
+            <h3 style="margin-bottom: 15px; text-align: center;">📊 Data Flow & Processing Pipeline</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
+                    <strong>1. User Input</strong><br>
+                    <small>Voice commands, text input, and interactions captured through hardware sensors</small>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
+                    <strong>2. AI Processing</strong><br>
+                    <small>Speech recognition, NLP analysis, skill assessment, and intelligent feedback generation</small>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
+                    <strong>3. Backend Logic</strong><br>
+                    <small>API routing, authentication, analytics processing, and gamification rewards</small>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
+                    <strong>4. Data Storage</strong><br>
+                    <small>Persistent storage, caching, and integration with external government APIs</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Add interactive hover effects
+        document.querySelectorAll('.component').forEach(component => {
+            component.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px) scale(1.02)';
+                this.style.zIndex = '100';
+            });
+            
+            component.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.zIndex = 'auto';
+            });
+        });
+        
+        // Add click events for component details
+        document.querySelectorAll('.component').forEach(component => {
+            component.addEventListener('click', function() {
+                const title = this.querySelector('.component-title').textContent;
+                const subtitle = this.querySelector('.component-subtitle')?.textContent || '';
+                alert(`${title}\n\n${subtitle}\n\nComponent of PRAGATI-AI System Architecture`);
+            });
+        });
+    </script>
+</body>
+</html>

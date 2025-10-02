@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employer Portal - PRAGATI-AI</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .employer-portal {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+        
+        .portal-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .portal-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 2rem;
+        }
+        
+        .portal-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .portal-nav {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .nav-tab {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-tab.active {
+            background: white;
+            color: #1e40af;
+            transform: translateY(-2px);
+        }
+        
+        .nav-tab:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            margin-bottom: 2rem;
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .company-info {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 1rem;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(30, 64, 175, 0.05);
+            border-radius: 0.75rem;
+            margin-bottom: 2rem;
+        }
+        
+        .company-logo {
+            width: 60px;
+            height: 60px;
+            background: #1e40af;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .logout-btn {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .logout-btn:hover {
+            background: #ef4444;
+            color: white;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #1e40af;
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        }
+        
+        .quota-section {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .quota-title {
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .quota-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .quota-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+        
+        .quota-item input {
+            width: 60px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .skill-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .skill-chip {
+            background: #1e40af;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-chip.selected {
+            background: #10b981;
+            transform: scale(1.05);
+        }
+        
+        .candidates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .candidate-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border-left: 4px solid #1e40af;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .candidate-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .candidate-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+        
+        .candidate-info h4 {
+            margin: 0 0 0.25rem 0;
+            color: #1e293b;
+        }
+        
+        .candidate-info p {
+            margin: 0;
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+        
+        .match-score {
+            background: #10b981;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .skills-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+            margin-bottom: 1rem;
+        }
+        
+        .skill-tag {
+            background: rgba(30, 64, 175, 0.1);
+            color: #1e40af;
+            padding: 0.125rem 0.5rem;
+            border-radius: 0.75rem;
+            font-size: 0.75rem;
+        }
+        
+        .candidate-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            border: none;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .btn-primary {
+            background: #1e40af;
+            color: white;
+        }
+        
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+        
+        .btn-warning {
+            background: #f59e0b;
+            color: white;
+        }
+        
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+        
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .metric-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1e40af;
+        }
+        
+        .metric-label {
+            color: #64748b;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+        
+        .internship-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #1e40af;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .internship-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+        
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .status-active { background: #dcfce7; color: #166534; }
+        .status-draft { background: #fef3c7; color: #92400e; }
+        .status-filled { background: #dbeafe; color: #1e40af; }
+        
+        /* Welcome Button Styles */
+        .welcome-btn {
+            display: inline-flex !important;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 2rem;
+            margin: 0 0.5rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            position: relative;
+            z-index: 10;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        
+        .welcome-btn.btn-primary {
+            background: #1e40af !important;
+            color: white !important;
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+        }
+        
+        .welcome-btn.btn-primary:hover {
+            background: #1d4ed8 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 64, 175, 0.4);
+        }
+        
+        .welcome-btn.btn-secondary {
+            background: transparent !important;
+            color: white !important;
+            border: 2px solid rgba(255, 255, 255, 0.8) !important;
+        }
+        
+        .welcome-btn.btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1) !important;
+            border-color: white !important;
+            transform: translateY(-2px);
+        }
+        
+        /* Form Button Styles */
+        .form-btn {
+            display: inline-flex !important;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            position: relative;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        
+        .form-btn.btn-primary {
+            background: #1e40af !important;
+            color: white !important;
+            box-shadow: 0 2px 10px rgba(30, 64, 175, 0.3);
+        }
+        
+        .form-btn.btn-primary:hover {
+            background: #1d4ed8 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.4);
+        }
+        
+        .form-btn.btn-secondary {
+            background: #f8fafc !important;
+            color: #64748b !important;
+            border: 2px solid #e2e8f0 !important;
+        }
+        
+        .form-btn.btn-secondary:hover {
+            background: #e2e8f0 !important;
+            border-color: #cbd5e1 !important;
+            transform: translateY(-2px);
+        }
+        
+        /* Enhanced Button Styles for better visibility */
+        .btn-sm {
+            display: inline-flex !important;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            border: none;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        
+        .btn-sm.btn-primary {
+            background: #1e40af !important;
+            color: white !important;
+        }
+        
+        .btn-sm.btn-primary:hover {
+            background: #1d4ed8 !important;
+            transform: translateY(-1px);
+        }
+        
+        .btn-sm.btn-success {
+            background: #10b981 !important;
+            color: white !important;
+        }
+        
+        .btn-sm.btn-success:hover {
+            background: #059669 !important;
+            transform: translateY(-1px);
+        }
+        
+        .btn-sm.btn-warning {
+            background: #f59e0b !important;
+            color: white !important;
+        }
+        
+        .btn-sm.btn-warning:hover {
+            background: #d97706 !important;
+            transform: translateY(-1px);
+        }
+        
+        .btn-sm.btn-danger {
+            background: #ef4444 !important;
+            color: white !important;
+        }
+        
+        .btn-sm.btn-danger:hover {
+            background: #dc2626 !important;
+            transform: translateY(-1px);
+        }
+        
+        /* Enhanced Logout Button */
+        .logout-btn {
+            background: rgba(239, 68, 68, 0.1) !important;
+            border: 1px solid #ef4444 !important;
+            color: #ef4444 !important;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex !important;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        
+        .logout-btn:hover {
+            background: #ef4444 !important;
+            color: white !important;
+            transform: translateY(-2px);
+        }
+        
+        /* Enhanced Navigation Tabs */
+        .nav-tab {
+            background: rgba(255, 255, 255, 0.2) !important;
+            border: none;
+            color: white !important;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex !important;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        
+        .nav-tab.active {
+            background: white !important;
+            color: #1e40af !important;
+            transform: translateY(-2px);
+        }
+        
+        .nav-tab:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.3) !important;
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+    <div class="employer-portal">
+        <div class="portal-container">
+            <div class="portal-header">
+                <h1>🏢 Employer Portal - PRAGATI-AI</h1>
+                <p>Advanced Talent Acquisition & Management System</p>
+                <div class="welcome-actions" style="margin-top: 1.5rem; text-align: center; position: relative; z-index: 10;">
+                    <button class="btn btn-primary welcome-btn" onclick="startPortalTour()">
+                        <i class="fas fa-rocket"></i>
+                        Get Started
+                    </button>
+                    <button class="btn btn-secondary welcome-btn" onclick="showSection('post-internship')">
+                        <i class="fas fa-plus-circle"></i>
+                        Post Internship
+                    </button>
+                </div>
+            </div>
+            
+            <div class="portal-nav">
+                <div class="nav-tabs">
+                    <button class="nav-tab active" onclick="showSection('dashboard')">
+                        <i class="fas fa-chart-bar"></i>
+                        Dashboard
+                    </button>
+                    <button class="nav-tab" onclick="showSection('post-internship')">
+                        <i class="fas fa-plus-circle"></i>
+                        Post Internship
+                    </button>
+                    <button class="nav-tab" onclick="showSection('candidates')">
+                        <i class="fas fa-users"></i>
+                        Matched Candidates
+                    </button>
+                    <button class="nav-tab" onclick="showSection('interviews')">
+                        <i class="fas fa-video"></i>
+                        Interviews
+                    </button>
+                    <button class="nav-tab" onclick="showSection('feedback')">
+                        <i class="fas fa-star"></i>
+                        Feedback
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Dashboard Section -->
+            <div id="dashboard" class="content-section active">
+                <div class="company-info">
+                    <div class="company-logo">TC</div>
+                    <div>
+                        <h3>Tech Corp India</h3>
+                        <p>IT Services & Software Development • Mumbai, Maharashtra</p>
+                        <p><i class="fas fa-users"></i> 15,000+ employees • <i class="fas fa-star"></i> 4.2 rating</p>
+                    </div>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </button>
+                </div>
+                
+                <h2 class="section-title">
+                    <i class="fas fa-chart-bar"></i>
+                    Company Dashboard
+                </h2>
+                
+                <div class="analytics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">8</div>
+                        <div class="metric-label">Active Internships</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">156</div>
+                        <div class="metric-label">Total Applications</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">47</div>
+                        <div class="metric-label">AI-Matched Candidates</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">89%</div>
+                        <div class="metric-label">Match Quality Score</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">12</div>
+                        <div class="metric-label">Interviews Scheduled</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">94%</div>
+                        <div class="metric-label">Quota Compliance</div>
+                    </div>
+                </div>
+                
+                <h3 style="margin: 2rem 0 1rem 0;">Recent Internships</h3>
+                <div class="internship-card">
+                    <div class="internship-header">
+                        <div>
+                            <h4>Full Stack Developer Intern</h4>
+                            <p>React, Node.js, MongoDB • 6 months • ₹25,000/month</p>
+                        </div>
+                        <span class="status-badge status-active">Active</span>
+                    </div>
+                    <p><strong>23 candidates matched</strong> • 5 from rural areas • 3 SC/ST category</p>
+                    <button class="btn-sm btn-primary">View Candidates</button>
+                </div>
+                
+                <div class="internship-card">
+                    <div class="internship-header">
+                        <div>
+                            <h4>Data Science Intern</h4>
+                            <p>Python, ML, Statistics • 4 months • ₹30,000/month</p>
+                        </div>
+                        <span class="status-badge status-filled">Filled</span>
+                    </div>
+                    <p><strong>Selected:</strong> Priya Sharma (Rural, OBC) - 96% match</p>
+                    <button class="btn-sm btn-success">View Details</button>
+                </div>
+            </div>
+            
+            <!-- Post Internship Section -->
+            <div id="post-internship" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-plus-circle"></i>
+                    Post New Internship
+                </h2>
+                
+                <form id="internship-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="title">Internship Title</label>
+                            <input type="text" id="title" class="form-control" required placeholder="e.g., Full Stack Developer Intern">
+                        </div>
+                        <div class="form-group">
+                            <label for="department">Department</label>
+                            <select id="department" class="form-control" required>
+                                <option value="">Select Department</option>
+                                <option value="engineering">Engineering</option>
+                                <option value="design">Design</option>
+                                <option value="marketing">Marketing</option>
+                                <option value="hr">Human Resources</option>
+                                <option value="finance">Finance</option>
+                                <option value="operations">Operations</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">Job Description</label>
+                        <textarea id="description" class="form-control" rows="4" required placeholder="Describe the role, responsibilities, and learning outcomes..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Required Skills</label>
+                        <div class="skill-selector" id="skill-selector">
+                            <div class="skill-chip" onclick="toggleSkill(this)">JavaScript</div>
+                            <div class="skill-chip" onclick="toggleSkill(this)">Python</div>
+                            <div class="skill-chip" onclick="toggleSkill(this)">React</div>
+                            <div class="skill-chip" onclick="toggleSkill(this)">Node.js</div>
+                            <div class="skill-chip" onclick="toggleSkill(this)">Java</div>
+                            <div class="skill-chip" onclick="toggleSkill(this)">SQL</div>
+                            <div class="skill-chip" onclick="toggleSkill(this)">Machine Learning</div>
+                            <div class="skill-chip" onclick="toggleSkill(this)">UI/UX Design</div>
+                            <div class="skill-chip" onclick="toggleSkill(this)">Digital Marketing</div>
+                            <div class="skill-chip" onclick="toggleSkill(this)">Data Analysis</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="duration">Duration (months)</label>
+                            <input type="number" id="duration" class="form-control" min="1" max="12" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="stipend">Stipend (₹/month)</label>
+                            <input type="number" id="stipend" class="form-control" min="5000" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="total-positions">Total Positions</label>
+                            <input type="number" id="total-positions" class="form-control" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="work-mode">Work Mode</label>
+                            <select id="work-mode" class="form-control" required>
+                                <option value="remote">Remote</option>
+                                <option value="onsite">On-site</option>
+                                <option value="hybrid">Hybrid</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="quota-section">
+                        <div class="quota-title">
+                            <i class="fas fa-balance-scale"></i>
+                            Affirmative Action Quotas (As per Government Guidelines)
+                        </div>
+                        <div class="quota-grid">
+                            <div class="quota-item">
+                                <label>Rural Students</label>
+                                <input type="number" id="rural-quota" class="form-control" min="0" placeholder="0">
+                                <small>Recommended: 25%</small>
+                            </div>
+                            <div class="quota-item">
+                                <label>SC Category</label>
+                                <input type="number" id="sc-quota" class="form-control" min="0" placeholder="0">
+                                <small>Recommended: 15%</small>
+                            </div>
+                            <div class="quota-item">
+                                <label>ST Category</label>
+                                <input type="number" id="st-quota" class="form-control" min="0" placeholder="0">
+                                <small>Recommended: 7.5%</small>
+                            </div>
+                            <div class="quota-item">
+                                <label>OBC Category</label>
+                                <input type="number" id="obc-quota" class="form-control" min="0" placeholder="0">
+                                <small>Recommended: 27%</small>
+                            </div>
+                            <div class="quota-item">
+                                <label>EWS Category</label>
+                                <input type="number" id="ews-quota" class="form-control" min="0" placeholder="0">
+                                <small>Recommended: 10%</small>
+                            </div>
+                            <div class="quota-item">
+                                <label>Female Candidates</label>
+                                <input type="number" id="female-quota" class="form-control" min="0" placeholder="0">
+                                <small>Recommended: 30%</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions" style="text-align: center; margin-top: 2rem;">
+                        <button type="button" class="btn btn-secondary form-btn" onclick="resetForm()">
+                            <i class="fas fa-undo"></i>
+                            Reset Form
+                        </button>
+                        <button type="submit" class="btn btn-primary form-btn" style="margin-left: 1rem;">
+                            <i class="fas fa-rocket"></i>
+                            Post Internship
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Candidates Section -->
+            <div id="candidates" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-users"></i>
+                    AI-Matched Candidates
+                </h2>
+                
+                <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
+                    <p><strong>🎯 AI Matching Complete:</strong> Found 23 highly compatible candidates for "Full Stack Developer Intern" position with 89% average match quality.</p>
+                </div>
+                
+                <div class="candidates-grid" id="candidates-grid">
+                    <!-- Candidates will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Interviews Section -->
+            <div id="interviews" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-video"></i>
+                    Interview Management
+                </h2>
+                
+                <div style="text-align: center; padding: 3rem;">
+                    <i class="fas fa-video" style="font-size: 3rem; color: #64748b; margin-bottom: 1rem;"></i>
+                    <h3>Interview System Coming Soon</h3>
+                    <p>Integrated video interview platform with AI-powered assessment tools.</p>
+                </div>
+            </div>
+            
+            <!-- Feedback Section -->
+            <div id="feedback" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-star"></i>
+                    Feedback & Performance
+                </h2>
+                
+                <div style="text-align: center; padding: 3rem;">
+                    <i class="fas fa-chart-line" style="font-size: 3rem; color: #64748b; margin-bottom: 1rem;"></i>
+                    <h3>Performance Analytics Dashboard</h3>
+                    <p>Track intern performance, provide feedback, and help improve AI matching algorithms.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all nav tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+            
+            // Load section-specific data
+            if (sectionId === 'candidates') {
+                loadCandidates();
+            }
+        }
+        
+        function toggleSkill(element) {
+            element.classList.toggle('selected');
+        }
+        
+        function resetForm() {
+            document.getElementById('internship-form').reset();
+            document.querySelectorAll('.skill-chip.selected').forEach(chip => {
+                chip.classList.remove('selected');
+            });
+        }
+        
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                window.location.href = '../index.html';
+            }
+        }
+        
+        function loadCandidates() {
+            const candidatesGrid = document.getElementById('candidates-grid');
+            
+            const candidates = [
+                {
+                    name: 'Raj Patel',
+                    education: 'B.Tech Computer Science, IIT Bombay',
+                    location: 'Rural Maharashtra',
+                    category: 'OBC',
+                    skills: ['JavaScript', 'React', 'Node.js', 'MongoDB'],
+                    match: 96,
+                    verified: true
+                },
+                {
+                    name: 'Priya Sharma',
+                    education: 'B.Tech Information Technology, NIT Delhi',
+                    location: 'Rural Rajasthan',
+                    category: 'General',
+                    skills: ['Python', 'Machine Learning', 'SQL', 'TensorFlow'],
+                    match: 94,
+                    verified: true
+                },
+                {
+                    name: 'Arjun Kumar',
+                    education: 'BCA, Delhi University',
+                    location: 'Urban Delhi',
+                    category: 'SC',
+                    skills: ['Java', 'Spring Boot', 'MySQL', 'AWS'],
+                    match: 91,
+                    verified: false
+                },
+                {
+                    name: 'Sneha Reddy',
+                    education: 'B.Tech CSE, IIIT Hyderabad',
+                    location: 'Urban Telangana',
+                    category: 'General',
+                    skills: ['React', 'JavaScript', 'UI/UX', 'Figma'],
+                    match: 89,
+                    verified: true
+                }
+            ];
+            
+            candidatesGrid.innerHTML = candidates.map(candidate => `
+                <div class="candidate-card">
+                    <div class="candidate-header">
+                        <div class="candidate-info">
+                            <h4>${candidate.name} ${candidate.verified ? '✅' : ''}</h4>
+                            <p>${candidate.education}</p>
+                            <p><i class="fas fa-map-marker-alt"></i> ${candidate.location} • ${candidate.category} Category</p>
+                        </div>
+                        <div class="match-score">${candidate.match}% Match</div>
+                    </div>
+                    <div class="skills-row">
+                        ${candidate.skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
+                    </div>
+                    <div class="candidate-actions">
+                        <button class="btn-sm btn-primary" onclick="viewProfile('${candidate.name}')">
+                            <i class="fas fa-user"></i> View Profile
+                        </button>
+                        <button class="btn-sm btn-success" onclick="scheduleInterview('${candidate.name}')">
+                            <i class="fas fa-video"></i> Interview
+                        </button>
+                        <button class="btn-sm btn-warning" onclick="requestTest('${candidate.name}')">
+                            <i class="fas fa-clipboard-check"></i> Test
+                        </button>
+                        <button class="btn-sm btn-primary" onclick="sendOffer('${candidate.name}')">
+                            <i class="fas fa-paper-plane"></i> Send Offer
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function viewProfile(name) {
+            alert(`Viewing detailed profile for ${name} - This would show complete candidate information, portfolio, and AI analysis.`);
+        }
+        
+        function scheduleInterview(name) {
+            alert(`Scheduling video interview with ${name} - Integration with calendar and video platforms.`);
+        }
+        
+        function requestTest(name) {
+            alert(`Sending skill assessment test to ${name} - AI-powered technical evaluation.`);
+        }
+        
+        function sendOffer(name) {
+            if (confirm(`Send internship offer to ${name}?`)) {
+                alert(`Offer sent successfully! ${name} will be notified immediately.`);
+            }
+        }
+        
+        // Form submission handler
+        document.getElementById('internship-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const selectedSkills = Array.from(document.querySelectorAll('.skill-chip.selected')).map(chip => chip.textContent);
+            
+            alert('🚀 Internship posted successfully!\n\nAI matching algorithm will now:\n• Analyze job requirements\n• Find compatible candidates\n• Apply quota constraints\n• Rank by match quality\n\nExpected matches: 15-25 candidates within 2 minutes');
+            
+            // Simulate AI processing
+            setTimeout(() => {
+                alert('✅ AI Processing Complete!\n\n• 23 candidates matched\n• Average match quality: 89%\n• Quota compliance: 100%\n• Ready for review');
+                showSection('candidates');
+            }, 3000);
+        });
+        
+        function startPortalTour() {
+            alert('🎆 Welcome to PRAGATI-AI Employer Portal!\n\nHere\'s what you can do:\n\n📈 Dashboard: View your company analytics\n➕ Post Internship: Create new opportunities\n👥 Candidates: Review AI-matched talent\n🎥 Interviews: Schedule and manage interviews\n⭐ Feedback: Track performance and improve matching\n\nThe AI system automatically matches candidates based on skills, location, and diversity quotas!');
+            
+            // Show dashboard section
+            showSection('dashboard');
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🏢 PRAGATI-AI Employer Portal Initialized');
+        });
+    </script>
+</body>
+</html>

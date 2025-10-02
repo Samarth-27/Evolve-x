@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRAGATI-AI - End-to-End Architecture Diagram</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .diagram-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header p {
+            color: #718096;
+            font-size: 1.1rem;
+        }
+        
+        .architecture-svg {
+            width: 100%;
+            height: auto;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            background: #f7fafc;
+        }
+        
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .stack-category {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .stack-category h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .stack-category ul {
+            list-style: none;
+        }
+        
+        .stack-category li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .stack-category li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .workflow-section {
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 15px;
+        }
+        
+        .workflow-section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2d3748;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            .diagram-container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="diagram-container">
+        <div class="header">
+            <h1>PRAGATI-AI</h1>
+            <p>End-to-End Architecture & Workflow Diagram</p>
+            <p><strong>Smart India Hackathon 2024</strong></p>
+        </div>
+        
+        <!-- Main Architecture Diagram -->
+        <svg class="architecture-svg" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                </linearGradient>
+                <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+                </linearGradient>
+                <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#a8edea;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#fed6e3;stop-opacity:1" />
+                </linearGradient>
+                <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.3"/>
+                </filter>
+            </defs>
+            
+            <!-- User Layer -->
+            <rect x="50" y="50" width="1100" height="80" fill="url(#grad1)" rx="10" filter="url(#shadow)"/>
+            <text x="600" y="85" text-anchor="middle" fill="white" font-size="20" font-weight="bold">USER INTERACTION LAYER</text>
+            <text x="150" y="105" text-anchor="middle" fill="white" font-size="12">Student Portal</text>
+            <text x="300" y="105" text-anchor="middle" fill="white" font-size="12">Admin Dashboard</text>
+            <text x="450" y="105" text-anchor="middle" fill="white" font-size="12">Employer Portal</text>
+            <text x="600" y="105" text-anchor="middle" fill="white" font-size="12">AI Interview</text>
+            <text x="750" y="105" text-anchor="middle" fill="white" font-size="12">Skill Analysis</text>
+            <text x="900" y="105" text-anchor="middle" fill="white" font-size="12">Gamification</text>
+            <text x="1050" y="105" text-anchor="middle" fill="white" font-size="12">Verification</text>
+            
+            <!-- Frontend Layer -->
+            <rect x="50" y="160" width="1100" height="120" fill="url(#grad2)" rx="10" filter="url(#shadow)"/>
+            <text x="600" y="195" text-anchor="middle" fill="white" font-size="20" font-weight="bold">FRONTEND LAYER (Client-Side)</text>
+            
+            <!-- HTML5 Components -->
+            <rect x="80" y="210" width="150" height="50" fill="rgba(255,255,255,0.2)" rx="5"/>
+            <text x="155" y="230" text-anchor="middle" fill="white" font-size="12" font-weight="bold">HTML5</text>
+            <text x="155" y="245" text-anchor="middle" fill="white" font-size="10">Semantic Structure</text>
+            <text x="155" y="255" text-anchor="middle" fill="white" font-size="10">Responsive Design</text>
+            
+            <!-- CSS3 Components -->
+            <rect x="250" y="210" width="150" height="50" fill="rgba(255,255,255,0.2)" rx="5"/>
+            <text x="325" y="230" text-anchor="middle" fill="white" font-size="12" font-weight="bold">CSS3</text>
+            <text x="325" y="245" text-anchor="middle" fill="white" font-size="10">Grid & Flexbox</text>
+            <text x="325" y="255" text-anchor="middle" fill="white" font-size="10">Animations</text>
+            
+            <!-- JavaScript ES6+ -->
+            <rect x="420" y="210" width="150" height="50" fill="rgba(255,255,255,0.2)" rx="5"/>
+            <text x="495" y="230" text-anchor="middle" fill="white" font-size="12" font-weight="bold">JavaScript ES6+</text>
+            <text x="495" y="245" text-anchor="middle" fill="white" font-size="10">Modular Classes</text>
+            <text x="495" y="255" text-anchor="middle" fill="white" font-size="10">Event Handling</text>
+            
+            <!-- Web APIs -->
+            <rect x="590" y="210" width="150" height="50" fill="rgba(255,255,255,0.2)" rx="5"/>
+            <text x="665" y="230" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Web APIs</text>
+            <text x="665" y="245" text-anchor="middle" fill="white" font-size="10">Speech Recognition</text>
+            <text x="665" y="255" text-anchor="middle" fill="white" font-size="10">Local Storage</text>
+            
+            <!-- Libraries -->
+            <rect x="760" y="210" width="150" height="50" fill="rgba(255,255,255,0.2)" rx="5"/>
+            <text x="835" y="230" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Libraries</text>
+            <text x="835" y="245" text-anchor="middle" fill="white" font-size="10">Google Fonts</text>
+            <text x="835" y="255" text-anchor="middle" fill="white" font-size="10">Font Awesome</text>
+            
+            <!-- PWA Features -->
+            <rect x="930" y="210" width="150" height="50" fill="rgba(255,255,255,0.2)" rx="5"/>
+            <text x="1005" y="230" text-anchor="middle" fill="white" font-size="12" font-weight="bold">PWA Ready</text>
+            <text x="1005" y="245" text-anchor="middle" fill="white" font-size="10">Service Workers</text>
+            <text x="1005" y="255" text-anchor="middle" fill="white" font-size="10">Offline Support</text>
+            
+            <!-- Core Features Layer -->
+            <rect x="50" y="310" width="1100" height="120" fill="url(#grad3)" rx="10" filter="url(#shadow)"/>
+            <text x="600" y="345" text-anchor="middle" fill="#2d3748" font-size="20" font-weight="bold">CORE FEATURES & MODULES</text>
+            
+            <!-- Feature Modules -->
+            <rect x="80" y="360" width="140" height="50" fill="rgba(255,255,255,0.8)" rx="5"/>
+            <text x="150" y="380" text-anchor="middle" fill="#2d3748" font-size="11" font-weight="bold">AI Interview</text>
+            <text x="150" y="395" text-anchor="middle" fill="#2d3748" font-size="9">Speech Analysis</text>
+            <text x="150" y="405" text-anchor="middle" fill="#2d3748" font-size="9">Real-time Feedback</text>
+            
+            <rect x="240" y="360" width="140" height="50" fill="rgba(255,255,255,0.8)" rx="5"/>
+            <text x="310" y="380" text-anchor="middle" fill="#2d3748" font-size="11" font-weight="bold">Skill Gap Analysis</text>
+            <text x="310" y="395" text-anchor="middle" fill="#2d3748" font-size="9">Market Intelligence</text>
+            <text x="310" y="405" text-anchor="middle" fill="#2d3748" font-size="9">Learning Paths</text>
+            
+            <rect x="400" y="360" width="140" height="50" fill="rgba(255,255,255,0.8)" rx="5"/>
+            <text x="470" y="380" text-anchor="middle" fill="#2d3748" font-size="11" font-weight="bold">Gamification</text>
+            <text x="470" y="395" text-anchor="middle" fill="#2d3748" font-size="9">Achievement System</text>
+            <text x="470" y="405" text-anchor="middle" fill="#2d3748" font-size="9">Leaderboards</text>
+            
+            <rect x="560" y="360" width="140" height="50" fill="rgba(255,255,255,0.8)" rx="5"/>
+            <text x="630" y="380" text-anchor="middle" fill="#2d3748" font-size="11" font-weight="bold">Profile Management</text>
+            <text x="630" y="395" text-anchor="middle" fill="#2d3748" font-size="9">Dynamic Modals</text>
+            <text x="630" y="405" text-anchor="middle" fill="#2d3748" font-size="9">Data Persistence</text>
+            
+            <rect x="720" y="360" width="140" height="50" fill="rgba(255,255,255,0.8)" rx="5"/>
+            <text x="790" y="380" text-anchor="middle" fill="#2d3748" font-size="11" font-weight="bold">Skills Verification</text>
+            <text x="790" y="395" text-anchor="middle" fill="#2d3748" font-size="9">Blockchain Ready</text>
+            <text x="790" y="405" text-anchor="middle" fill="#2d3748" font-size="9">Certification</text>
+            
+            <rect x="880" y="360" width="140" height="50" fill="rgba(255,255,255,0.8)" rx="5"/>
+            <text x="950" y="380" text-anchor="middle" fill="#2d3748" font-size="11" font-weight="bold">Analytics</text>
+            <text x="950" y="395" text-anchor="middle" fill="#2d3748" font-size="9">Performance Metrics</text>
+            <text x="950" y="405" text-anchor="middle" fill="#2d3748" font-size="9">Progress Tracking</text>
+            
+            <!-- Data Layer -->
+            <rect x="50" y="460" width="1100" height="80" fill="#4a5568" rx="10" filter="url(#shadow)"/>
+            <text x="600" y="495" text-anchor="middle" fill="white" font-size="20" font-weight="bold">DATA & STORAGE LAYER</text>
+            <text x="200" y="515" text-anchor="middle" fill="white" font-size="12">Local Storage API</text>
+            <text x="400" y="515" text-anchor="middle" fill="white" font-size="12">Session Storage</text>
+            <text x="600" y="515" text-anchor="middle" fill="white" font-size="12">IndexedDB (Future)</text>
+            <text x="800" y="515" text-anchor="middle" fill="white" font-size="12">REST API Integration</text>
+            <text x="1000" y="515" text-anchor="middle" fill="white" font-size="12">Blockchain (Future)</text>
+            
+            <!-- Integration Layer -->
+            <rect x="50" y="570" width="1100" height="80" fill="#2d3748" rx="10" filter="url(#shadow)"/>
+            <text x="600" y="605" text-anchor="middle" fill="white" font-size="20" font-weight="bold">INTEGRATION & DEPLOYMENT LAYER</text>
+            <text x="150" y="625" text-anchor="middle" fill="white" font-size="12">Government APIs</text>
+            <text x="300" y="625" text-anchor="middle" fill="white" font-size="12">Industry Integration</text>
+            <text x="450" y="625" text-anchor="middle" fill="white" font-size="12">Cloud Deployment</text>
+            <text x="600" y="625" text-anchor="middle" fill="white" font-size="12">CDN Distribution</text>
+            <text x="750" y="625" text-anchor="middle" fill="white" font-size="12">Security Layer</text>
+            <text x="900" y="625" text-anchor="middle" fill="white" font-size="12">Performance Optimization</text>
+            <text x="1050" y="625" text-anchor="middle" fill="white" font-size="12">Monitoring</text>
+            
+            <!-- Flow Arrows -->
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#667eea" />
+                </marker>
+            </defs>
+            
+            <!-- Vertical flow arrows -->
+            <line x1="600" y1="130" x2="600" y2="150" stroke="#667eea" stroke-width="3" marker-end="url(#arrowhead)"/>
+            <line x1="600" y1="280" x2="600" y2="300" stroke="#667eea" stroke-width="3" marker-end="url(#arrowhead)"/>
+            <line x1="600" y1="430" x2="600" y2="450" stroke="#667eea" stroke-width="3" marker-end="url(#arrowhead)"/>
+            <line x1="600" y1="540" x2="600" y2="560" stroke="#667eea" stroke-width="3" marker-end="url(#arrowhead)"/>
+            
+            <!-- Workflow indicators -->
+            <text x="630" y="145" fill="#667eea" font-size="12" font-weight="bold">User Interaction</text>
+            <text x="630" y="295" fill="#667eea" font-size="12" font-weight="bold">Frontend Processing</text>
+            <text x="630" y="445" fill="#667eea" font-size="12" font-weight="bold">Feature Execution</text>
+            <text x="630" y="555" fill="#667eea" font-size="12" font-weight="bold">Data Management</text>
+            
+            <!-- Security & Performance Badges -->
+            <circle cx="1050" cy="750" r="30" fill="#10b981" filter="url(#shadow)"/>
+            <text x="1050" y="750" text-anchor="middle" fill="white" font-size="10" font-weight="bold">SECURE</text>
+            <text x="1050" y="760" text-anchor="middle" fill="white" font-size="8">Input Validation</text>
+            
+            <circle cx="950" cy="750" r="30" fill="#3b82f6" filter="url(#shadow)"/>
+            <text x="950" y="750" text-anchor="middle" fill="white" font-size="10" font-weight="bold">FAST</text>
+            <text x="950" y="760" text-anchor="middle" fill="white" font-size="8">Optimized</text>
+            
+            <circle cx="850" cy="750" r="30" fill="#8b5cf6" filter="url(#shadow)"/>
+            <text x="850" y="750" text-anchor="middle" fill="white" font-size="10" font-weight="bold">SCALABLE</text>
+            <text x="850" y="760" text-anchor="middle" fill="white" font-size="8">Modular</text>
+        </svg>
+        
+        <!-- Technology Stack Breakdown -->
+        <div class="tech-stack">
+            <div class="stack-category" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                <h3>🎨 Frontend Technologies</h3>
+                <ul>
+                    <li>HTML5 with Semantic Elements</li>
+                    <li>CSS3 with Grid & Flexbox</li>
+                    <li>CSS Variables & Custom Properties</li>
+                    <li>CSS Animations & Transitions</li>
+                    <li>Responsive Design (Mobile-First)</li>
+                    <li>Google Fonts Integration</li>
+                    <li>Font Awesome Icons</li>
+                </ul>
+            </div>
+            
+            <div class="stack-category" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                <h3>⚙️ JavaScript & APIs</h3>
+                <ul>
+                    <li>ES6+ Modern JavaScript</li>
+                    <li>Class-based Architecture</li>
+                    <li>Web Speech API (Recognition & Synthesis)</li>
+                    <li>Local Storage API</li>
+                    <li>DOM Manipulation</li>
+                    <li>Event-Driven Programming</li>
+                    <li>Async/Await Patterns</li>
+                </ul>
+            </div>
+            
+            <div class="stack-category" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                <h3>🚀 Core Features</h3>
+                <ul>
+                    <li>AI-Powered Interview Assistant</li>
+                    <li>Dynamic Skill Gap Analysis</li>
+                    <li>Gamification System</li>
+                    <li>Real-time Speech Processing</li>
+                    <li>Interactive Modal Systems</li>
+                    <li>Progress Tracking</li>
+                    <li>Achievement Badges</li>
+                </ul>
+            </div>
+            
+            <div class="stack-category" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                <h3>🛡️ Architecture & Security</h3>
+                <ul>
+                    <li>Modular Component Architecture</li>
+                    <li>Separation of Concerns</li>
+                    <li>Input Validation & Sanitization</li>
+                    <li>Safe DOM Handling</li>
+                    <li>Client-side Data Encryption</li>
+                    <li>Performance Optimization</li>
+                    <li>Cross-browser Compatibility</li>
+                </ul>
+            </div>
+            
+            <div class="stack-category" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                <h3>📱 Future Integration</h3>
+                <ul>
+                    <li>Progressive Web App (PWA)</li>
+                    <li>REST API Integration</li>
+                    <li>Blockchain Skills Verification</li>
+                    <li>Machine Learning Models</li>
+                    <li>Real-time WebSocket Communication</li>
+                    <li>Cloud Database Integration</li>
+                    <li>Government API Integration</li>
+                </ul>
+            </div>
+            
+            <div class="stack-category" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                <h3>🎯 Smart India Hackathon Focus</h3>
+                <ul>
+                    <li>Government Compliance Ready</li>
+                    <li>Scalable Architecture</li>
+                    <li>Innovation in AI Integration</li>
+                    <li>Technical Excellence</li>
+                    <li>User Experience Focus</li>
+                    <li>Performance Optimization</li>
+                    <li>Demonstration Ready</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Workflow Section -->
+        <div class="workflow-section">
+            <h2>📊 Data Flow & User Journey</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+                <div style="background: rgba(255,255,255,0.8); padding: 20px; border-radius: 10px;">
+                    <h4 style="color: #2d3748; margin-bottom: 10px;">1. User Entry</h4>
+                    <p style="color: #4a5568; font-size: 14px;">Students access portal → Select feature → Initialize session</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.8); padding: 20px; border-radius: 10px;">
+                    <h4 style="color: #2d3748; margin-bottom: 10px;">2. Feature Interaction</h4>
+                    <p style="color: #4a5568; font-size: 14px;">AI processing → Real-time feedback → Dynamic UI updates</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.8); padding: 20px; border-radius: 10px;">
+                    <h4 style="color: #2d3748; margin-bottom: 10px;">3. Data Processing</h4>
+                    <p style="color: #4a5568; font-size: 14px;">Client-side analysis → Local storage → Progress tracking</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.8); padding: 20px; border-radius: 10px;">
+                    <h4 style="color: #2d3748; margin-bottom: 10px;">4. Results & Growth</h4>
+                    <p style="color: #4a5568; font-size: 14px;">Performance metrics → Recommendations → Skill development</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
