@@ -177,7 +177,7 @@ graph TB
 - Horizontal scaling support
 - Cloud-native deployment ready
 
-## Smart India Hackathon 2024 Alignment
+## Smart India Hackathon 2025 Alignment
 
 ✅ **Innovation**: AI-powered interview assistance and skill analysis
 ✅ **Technical Excellence**: Modern web technologies and clean architecture
